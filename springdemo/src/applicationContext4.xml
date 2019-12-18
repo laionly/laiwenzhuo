@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+		<!-- Bean的实例化
+		    1.构造方法实例化，实体类中要有无参数的构造方法
+		    2.静态工厂实例化，bean元素的factory-method属性
+		    3.实例工厂实例化，bean元素的factory-bean，factory-method属性
+		      -->
+		      <bean id="bean1" class="com.intance.constructor.BeanOne" scope="prototype"></bean>
+		      <bean id="bean2" class="com.intance.staticfactory.StaticFactoryBean" factory-method="createBeanTwo"></bean>
+		      <bean id="factory" class="com.intance.factory.InstanceFactoryBean"></bean>
+		      <bean id="bean3" factory-bean="factory" factory-method="createBean"></bean>
+</beans>

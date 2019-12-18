@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<bean id="jc" class="com.spring.JavaCourse">
+		<property name="name" value="Java课程"></property>
+	</bean>
+	<!-- <bean id="jc1" class="com.spring.JavaCourse">
+		<property name="name" value="javaee课程"></property>
+	</bean> -->
+	<!-- 自动注入:
+	     autowire属性设置自动注入方式
+	     byType:根据实体类中属性对应的类型
+	     byName:根据实体类中属性名称
+	            是否使用自动注入，根据你想实现的功能，如果想把实体类中的全部对象类型注入到该实体对象，那就使用自动注入
+	            反之，不使用，因为自动注入不灵活
+	-->
+	<bean id="student" class="com.spring.Student" autowire="byType">
+		<!-- 通过property中value属性或者value子元素都可以实现向某一个属性注入值 -->
+		<property name="sno" >
+			<value>117333440114</value>
+			<!-- <null></null>对某个属性赋值为空 -->
+		</property>
+		<property name="name" value="赖文卓"></property>
+		<property name="age" value="21"></property>
+		<!-- ref属性可以指定参考对象 ，它的值时改对象在容器中id元素对应的值 -->
+		<!-- <property name="jc" ref="jc"></property> -->
+	</bean>
+
+</beans>

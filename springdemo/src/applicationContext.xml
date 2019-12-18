@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		<!-- 实例化对象就是把对象放入到spring容器中，通过bean元素配置 -->
+		<!-- 1.当指定id属性值时，可以通过getBean("id值")来获取对象，id值时不能重复的
+		     2.当没有指定id值时，可以通过getBean("class属性值也就是完全限定名")来获取对象
+		     3.bean元素可以有任意个相同class属性的对象 -->
+		<bean id="javaCourse" class="com.spring.JavaCourse">
+		<property name="name" value="Java课程"></property>
+		</bean>
+		
+		<bean id="htmlCourse" class="com.spring.HtmlCourse">
+		<property name="name" value="Html课程"></property>
+		</bean>
+		<!-- 依赖注入的两种方式:setter方法注入和构造方法注入 -->
+		<!-- 1.setter方法注入 -->
+		<bean id="student" class="com.spring.Student">
+		<!-- 通过property中value属性或者value子元素都可以实现向某一个属性注入值 -->
+		<property name="sno" value="117333440114">
+		<!-- <value>117333440114</value> -->
+		<!-- <null></null>对某个属性赋值为空 -->
+		</property>
+		<property name="name" value="赖文卓"></property>
+		<property name="age" value="21"></property>
+		<!-- ref属性可以指定参考对象 ，它的值时改对象在容器中id元素对应的值-->
+		<property name="jc" ref="javaCourse"></property>
+		</bean>
+		<!-- 2.构造方法注入 -->
+		<!-- 默认情况下按照构造方法顺序依次注入 -->
+		<!-- <bean id="student1" class="com.spring.Student">
+		通过index属性指定注入的顺序，从0开始
+		
+		<constructor-arg value="lwz" index="1"></constructor-arg>
+		<constructor-arg value="117333440114" index="0"></constructor-arg>
+		<constructor-arg value="21" index="2"></constructor-arg>
+		<constructor-arg  name="jc" ref="javaCourse" index="3"></constructor-arg>
+		<constructor-arg value="部长" index="4"></constructor-arg>
+		通过type属性指定注入顺序
+		
+		<constructor-arg value="117333440114" type="java.lang.String" ></constructor-arg>
+		<constructor-arg value="lwz" type="java.lang.String" ></constructor-arg>
+		<constructor-arg value="21" type="int" ></constructor-arg>
+		
+		</bean> -->
+		
+
+
+</beans>
