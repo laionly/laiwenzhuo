@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/spring-aop-5.0.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-aspects-5.0.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans-5.0.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-context-5.0.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core-5.0.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-expression-5.0.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-jdbc-5.0.11.RELEASE.jar" sourcepath="D:/qqdownload/spring资料/spring-framework-5.0.11.RELEASE.zip"/>
+	<classpathentry kind="lib" path="lib/spring-tx-5.0.11.RELEASE.jar" sourcepath="D:/spring-framework-5.0.11.RELEASE.zip"/>
+	<classpathentry kind="lib" path="lib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/aspectjweaver-1.8.10.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
