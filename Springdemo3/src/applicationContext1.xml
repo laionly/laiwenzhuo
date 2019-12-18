@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<!-- AspectJ之XML文件方式实现AOP -->
+ 	<bean id="calculateImpl" class="com.xxx.aspectj.xml.CalculateImpl"></bean>
+ 	<bean id="aspects" class="com.xxx.aspectj.xml.MyAspect" />
+ 	<!-- 配置切面 -->
+ 	<aop:config>
+ 		<aop:aspect id="aspect" ref="aspects">
+ 			<!-- 配置切点表达式，语法：
+ 				execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-pattern(param-pattern) throws-pattern?)
+ 				问号表示当前项可以有也可以没有，其中各项的语义如下：
+				modifiers-pattern：方法的可见性，如public，protected；
+				ret-type-pattern：方法的返回值类型，如int，void等；
+				declaring-type-pattern：方法所在类的全路径名，如com.spring.Aspect；
+				name-pattern：方法名类型，如buisinessService()；
+				param-pattern：方法的参数类型，如java.lang.String；
+				throws-pattern：方法抛出的异常类型，如java.lang.Exception；
+ 			
+ 			
+ 			 -->
+ 			 <!-- 配置切点 -->
+ 			 <!-- method:切面类方法的名称;pointcut-ref:切点的id值; -->
+ 			<!-- returning的值等于切面类里 Object的对象名" -->
+ 			<!-- throwing的值等于切面类里Exception的对象名 -->
+ 			<!-- 执行顺序跟配置顺序有关 -->
+ 			<aop:pointcut expression="execution(* com.xxx.aspectj.xml.CalculateImpl.add(..)) " id="pointcut"/>
+ 			<aop:before method="one" pointcut-ref="pointcut" />
+ 			<aop:after-returning method="two"  pointcut-ref="pointcut"  returning="re"/>
+ 			<aop:after-throwing method="three" pointcut-ref="pointcut"  throwing="ex"/>
+ 			<aop:after method="four" pointcut-ref="pointcut"  />
+ 			<aop:around method="five" pointcut-ref="pointcut" />
+ 	   </aop:aspect>
+ 	</aop:config>
+</beans>

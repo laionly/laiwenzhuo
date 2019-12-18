@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<!-- 使用Schema-based方式实现Aop -->
+	<bean id="calculateImpl" class="com.xxx.schema.CalculateImpl"></bean>
+	<!-- 实例化通知对象，把通知类注入到IOC容器中 ,在切面中引用 -->
+	<bean id="before" class="com.xxx.schema.BeforeAdvices"></bean>
+	<!-- 注意：最终通知实现类没有重写方法 -->
+	<!-- <bean id="after" class="com.xxx.schema.Afters"></bean> -->
+	<bean id="throw" class="com.xxx.schema.ThrowAdvice"></bean>
+	<bean id="around" class="com.xxx.schema.Arounds"></bean>
+	<bean id="afterreturn" class="com.xxx.schema.AfterReturningsAdvice"></bean>
+	<!-- 配置AOP，把切面织入到目标对象 -->
+	<aop:config>
+		<!-- 配置切点，*是通配符，方法参数(..) -->
+		<aop:pointcut expression="execution(public int com.xxx.schema.CalculateImpl.*(..))" id="point"/>
+		<!-- 配置通知 -->
+		<aop:advisor advice-ref="before" pointcut-ref="point"/>
+		<!-- <aop:advisor advice-ref="after" pointcut-ref="point"/> -->
+		<aop:advisor advice-ref="throw" pointcut-ref="point"/>
+		<aop:advisor advice-ref="around" pointcut-ref="point"/>
+		<aop:advisor advice-ref="afterreturn" pointcut-ref="point"/>
+	</aop:config> 
+
+ 
+</beans>
