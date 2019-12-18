@@ -1,0 +1,16 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        <hibernate-mapping package="SportsMall.entity">
+        <class name="Product" table="product">
+        <id name="id" column="id">
+        <generator class="identity">
+        
+        </generator>
+        </id> 
+        <property name="name" column="name"></property>
+        <property name="listimg" column="listimg"></property>
+        <property name="price" column="price"></property>
+        <property name="discountprice" column="discountprice"></property>
+        </class>
+        </hibernate-mapping>

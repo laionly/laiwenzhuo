@@ -1,0 +1,390 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background: black;
+}
+
+.header {
+    background: black;
+}
+
+/* ————————————————————————————————————————————————用户导航———————————————————————————————————————————————————— */
+.header-wrap {
+    /* display: none; */
+    width: 1200px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+/* 导航左 */
+.header-left {
+    width: 672px;
+    float: left;
+    margin: 20px 40px 20px 30px;
+    /* 上右下左 */
+}
+
+.menu {
+    margin-left: 20px;
+    margin-top:10px;
+    display: inline-block;
+}
+
+.menu ul {
+    list-style: none;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+
+.menu li {
+    margin: 5px 2px 14px 18px;
+    float: left;
+}
+
+.menu a{
+    text-decoration: none;
+    color:white;
+    font-size: 20px;
+    padding: 4px 16px 4px 16px;
+}
+.menu a:hover {
+    cursor: pointer;
+    color: #000;
+    background: white;
+}
+
+
+/* 导航右 */
+.header-right {
+    height: 40px;
+    float: right;
+    margin: 30px;
+}
+
+.header-right ul {
+    list-style: none;
+    color: white;
+}
+
+.header-right li {
+    float: left;
+    font-size: 26px;
+    margin: 10px;
+    cursor: pointer;
+}
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+/* ————————————————————————————————————————登录、注册、登出、个人信息都在这—————————————————————————————————————— */
+.yonghu{
+    display: none;
+    width: 170px;
+    height: 80px;
+    position: relative;
+    top: 102px;
+    left: 988px;
+    z-index: 100;
+}
+.yonghubg{
+    width: 170px;
+    height: 80px;
+    background-color:white;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+.yonghu button{
+    background: gold;
+    border:1px solid snow;
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    position: relative;
+    top: -80px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.yonghu1{
+    display: none;
+    width: 170px;
+    height: 80px;
+    position: relative;
+    top: 102px;
+    left: 988px;
+    z-index: 100;
+}
+.yonghubg1{
+    width: 170px;
+    height: 80px;
+    background-color:white;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+.yonghu1 button{
+    background: gold;
+    border:1px solid snow;
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    position: relative;
+    top: -80px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.yonghu2{
+    display: none;
+    width: 170px;
+    height: 80px;
+    position: relative;
+    top: 102px;
+    left: 988px;
+    z-index: 100;
+}
+.yonghubg2{
+    width: 170px;
+    height: 80px;
+    background-color:white;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+.yonghu2 button{
+    background: gold;
+    border:1px solid snow;
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    position: relative;
+    top: -80px;
+    left: 20px;
+    cursor: pointer;
+}
+/* —————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+/* ———————————————————————————————————————————管理员导航——————————————————————————————————————————————————— */
+.header1-wrap {
+    display: none;
+    width: 1200px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+/* 导航左 */
+.header1-left {
+    width: 672px;
+    float: left;
+    margin: 20px 40px 20px 30px;
+}
+
+.menu1 {
+    margin-left: 20px;
+    margin-top:10px;
+    display: inline-block;
+}
+
+.menu1 ul {
+    list-style: none;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+
+.menu1 li {
+    margin: 5px 2px 14px 18px;
+    float: left;
+}
+
+.menu1 a{
+    text-decoration: none;
+    color:white;
+    font-size: 20px;
+    padding: 4px 16px 4px 16px;
+}
+.menu1 a:hover {
+    cursor: pointer;
+    color: #000;
+    background: white;
+}
+
+/* 导航右 */
+.header1-right {
+    height: 40px;
+    float: right;
+    margin: 30px;
+}
+
+.header1-right ul {
+    list-style: none;
+    color: white;
+}
+
+.header1-right li {
+    float: left;
+    font-size: 26px;
+    margin: 10px;
+    cursor: pointer;
+}
+/* ———————————————————————————————————————————————————————————————————————————————————— */
+
+.box{
+	width: 500px;
+	/* height: 100%; */
+	margin: 0 auto;
+	/* margin-top: 50px; */
+	background-color: whitesmoke;
+}
+.user{
+	float: left;
+	margin-top: 10px;
+    margin-left: 50px;
+}
+.user span{
+	color: gray;
+	margin-left: 20px;
+}
+.icon-dizhi{
+	font-size: 25px;
+	color: white;
+	margin-left: 5px;
+	float: left;
+}
+.logo{
+	width: 450px;
+	height:55px;
+	float: left;
+}
+ .logo span{
+	width:35px;
+	height: 35px;
+	margin-right: 15px;
+	line-height: 40px;
+	text-align: center;
+    background: orangered;
+	border-radius: 50%;
+}
+.adrress{
+	width: 470px;
+	height: 100px;
+	margin: 0 auto;
+	background: aliceblue;
+}
+.qingdan{
+	font-weight:bold ;
+	margin: 0 auto;
+	padding: 10px;
+	margin-top: 10px;
+	width: 450px;
+	height: 40px;
+	line-height: 40px;
+	background-color: white;
+}
+.tu{
+	width: 470px;
+	height: 165px;
+	margin: 0 auto;
+	background: #DCDCDC;
+	margin-top: 20px;
+}
+.tu img{
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.tu li{
+	width: 320px;
+	float: left;
+	color: red;
+	font-weight: 800;
+	list-style-type: none;
+	margin-top: 60px;
+}
+.head{
+	width: 330px;
+	height: 30px;
+	margin-left: 5px;
+	float:left;
+	margin-top: 10px;
+}
+.xingxi{
+	width: 470px;
+	height: 300px;
+	margin: 0 auto;
+	margin-top: 20px;
+	padding: 5px;
+	background: moccasin;
+}
+.xingxi p{
+	margin: 0 auto;
+	background: beige;
+	width: 470px;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 10px;
+}
+.xingxi span{
+	float: right;
+	margin-right: 10px;
+}
+.xingxi button{
+	width: 100px;
+	height: 50px;
+	background: yellow;
+	float:right;
+	margin-top: 30px;
+	margin-right: 20px;
+	cursor: pointer;
+	border: 1px solid orange;
+	
+}
+.xingxi button:hover{
+	background:red;
+	color: white;
+}
+
+/* 底部信息栏 */
+.footer {
+    background: black;
+}
+
+.footer-wrap {
+    height: 170px;
+}
+
+.row {
+    width: 1200px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.footer-ul ul {
+    float: left;
+    color: white;
+    list-style: none;
+    margin: 30px 200px 30px 140px;
+}
+
+.footer-ul a {
+    text-decoration: none;
+    font-size: 12px;
+    color: white;
+}
+
+.footer-ul a:hover {
+    color: yellow;
+}
+
+.footer_bottom {
+    color: gainsboro;
+    font-size: 12px;
+}
+
+.copy {
+    width: 800px;
+    height: 20px;
+    margin: 0 auto;
+    margin-left: 100px;
+}
+/* 底部信息栏 */

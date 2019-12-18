@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户注册</title>
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1473987_p34tlh0h33f.css">
+    <link rel="stylesheet" type="text/css" href="css/zhuce.css">
+    <script src="jquery-2.2.4.min.js"></script>
+    <script src="js/cookie.js"></script>
+    <script>
+        $(document).ready(function () {
+            // a标签下的注册按钮的点击事件
+            $('.zhuce a').click(function () {
+                // 分别为用户，密码，手机，邮箱，地址的input
+                if ($('.zhuce input[type=user]').val() == '') {
+                    alert('未填写用户名!')
+                } else if ($('.zhuce input[type=password]').val() == '') {
+                    alert('未填写密码!')
+                } else if ($('.zhuce input[type=phone]').val() == '') {
+                    alert('未填写手机号!')
+                } else if ($('.zhuce input[type=email]').val() == '') {
+                    alert('未填写邮箱!')
+                } else if ($('.zhuce input[type=text]').val() == '') {
+                    alert('未填写地址!')
+                }else if (($('.zhuce input[type=user]').val().length < 1 || $('.zhuce input[type=user]').val().length >15) ||
+                          $('.zhuce input[type=password]').val().length > 9 ||
+                          $('.zhuce input[type=phone]').val().length > 11 ||
+                          $('.zhuce input[type=email]').val().length > 20 ||
+                          $('.zhuce input[type=text]').val().length > 20 
+                ) {
+                    alert('请按正确规则填写')
+                } 
+                else if (($('.zhuce input[type=user]').val().length >=1 && $('.zhuce input[type=user]').val().length <= 15) &
+                          $('.zhuce input[type=password]').val().length <= 9 &
+                          $('.zhuce input[type=phone]').val().length <= 11 &
+                          $('.zhuce input[type=email]').val().length <= 20 &
+                          $('.zhuce input[type=text]').val().length <= 20 
+                ) {
+                    var json={
+                       username: $('.zhuce input[type=user]').val(),
+                       password: $('.zhuce input[type=password]').val(),
+                       phone: $('.zhuce input[type=phone]').val(),
+                       email: $('.zhuce input[type=email]').val(),
+                       text: $('.zhuce input[type=text]').val() 
+                    }
+                    //以下的post请求意思是：前端将用户填写表单的所有input的值传入接口，注册接口里进行查重判断，
+                    //如果数据库里没有这组数据，则添加，并返回一个code值给前端，告诉前端是否登录成功
+                    $.post('注册接口', json, function (data,status,xhr) {
+                        console.log(data)
+                        var obj = JSON.parse(data)  
+                        // console.log(obj)  
+                        if (obj.code == 203) {  //设置注册成功返回的code值为203
+                            alert('用户注册成功，点击确定后跳转到登录页')
+                            window.location.href = "login.html"
+                        } else {
+                            alert('注册失败')
+                        }
+                    })
+                    
+                  }
+            })
+
+            //注册表单失去焦点事件
+            $('.zhuce input[type=user]').blur(function () {
+                $(this).css('border-color', '')
+                if ($(this).val() == '') {
+                    $(this).css('border-color', 'red')
+                    $(this).attr('placeholder', '未填写用户名!')
+                } else if ($(this).val().length < 1) {
+                    alert('用户名不得小于1个字符!')
+                    $(this).css('border-color', 'red')
+                } else if ($(this).val().length > 15) {
+                    alert('用户名不得大于15个字符!')
+                    $(this).css('border-color', 'red')
+                }
+            })
+            $('.zhuce input[type=password]').blur(function () {
+                $(this).css('border-color', '')
+                if ($(this).val() == '') {
+                    $(this).css('border-color', 'red')
+                    $(this).attr('placeholder', '未填写密码!')
+                }else if ($(this).val().length > 9) {
+                    alert('密码不得大于9个字符!')
+                    $(this).css('border-color', 'red')
+                }
+            })
+            $('.zhuce input[type=phone]').blur(function () {
+                $(this).css('border-color', '')
+                if ($(this).val() == '') {
+                    $(this).css('border-color', 'red')
+                    $(this).attr('placeholder', '未填写手机号!')
+                }else if ($(this).val().length > 11) {
+                    alert('手机号不得大于11个数字!')
+                    $(this).css('border-color', 'red')
+                }
+            })
+            $('.zhuce input[type=email]').blur(function () {
+                $(this).css('border-color', '')
+                if ($(this).val() == '') {
+                    $(this).css('border-color', 'red')
+                    $(this).attr('placeholder', '未填写邮箱!')
+                }else if ($(this).val().length > 20) {
+                    alert('邮箱不得大于20个字符!')
+                    $(this).css('border-color', 'red')
+                }
+            })
+            $('.zhuce input[type=text]').blur(function () {
+                $(this).css('border-color', '')
+                if ($(this).val() == '') {
+                    $(this).css('border-color', 'red')
+                    $(this).attr('placeholder', '未填写地址!')
+                }else if ($(this).val().length > 20) {
+                    alert('地址不得大于20个字符!')
+                    $(this).css('border-color', 'red')
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <!-- header顶部导航,套用index.html的模板 -->
+    <div class="header">
+        <div class="header-wrap">
+            <div class="header-left">
+                <div class="menu">
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="ProductListServlet">商城</a></li>
+                        <li><a href="lianxi.html">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册表单 -->
+    <div class="middle">
+        <form action="UserRegisterServlet" method="post">
+            <div class="zhuce">
+                <span>用户注册</span>
+                <p>用户名:</p>
+                <input type="user" name="username" placeholder="请输入用户名(由1-15个字符组成)">
+
+                <p>密码:</p>
+                <input type="password" name="password" placeholder="请输入密码(不得大于9个字符)">
+
+                <p>手机号:</p>
+                <input type="phone" name="phone" placeholder="请输入手机号码(不得大于11个数字)">
+                
+
+                <p>邮箱:</p>
+                <input type="email" name="email" placeholder="请输入邮箱(不得大于20个字符)">
+
+                <p>地址:</p>
+                <input type="text" name="address" placeholder="请输入地址(不得大于20个字符)">
+                <input type="submit" name="tijiao" value="注册" >
+              <!--   <a href="#"><button class="button" type="button">注册</button></a> -->
+            </div>
+        </form>
+        <div class="zhucebg"></div>
+    </div>
+
+    <!-- 底部导航,套用index.html的模板 -->
+    <div class="footer">
+        <div class="footer-wrap">
+            <div class="row">
+                <div class="footer-ul">
+                    <ul>
+                        <h4>商品</h4>
+                        <li><a href="#">篮球</a></li>
+                        <li><a href="#">足球</a></li>
+                        <li><a href="#">羽毛球</a></li>
+                    </ul>
+                </div>
+                <div class="footer-ul">
+                    <ul>
+                        <h4>关于</h4>
+                        <li><a href="#">价格</a></li>
+                        <li><a href="#">质量</a></li>
+                        <li><a href="#">保障
+                            </a></li>
+                    </ul>
+                </div>
+                <div class="footer-ul">
+                    <ul>
+                        <h4>客户支持</h4>
+                        <li><a href="lianxi.html">联系我们</a></li>
+                        <li><a href="#">订单跟踪</a></li>
+                        <li><a href="personal.html">个人信息</a></li>
+                    </ul>
+                </div>
+                <div class="footer_bottom">
+                    <div class="copy">
+                        <p>世纪之歌小组.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

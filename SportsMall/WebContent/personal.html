@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>修改个人信息</title>
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1473973_wmm1qnjhr1.css" />
+	<link rel="stylesheet" type="text/css" href="css/personal.css" />
+	<script src="jquery-2.2.4.min.js"></script>
+	<script src="js/cookie.js"></script>
+	<script>
+		$(document).ready(function () {
+			// 判断用户是否处于登录状态,并将登录后存入的Cookie打印在input里
+			console.log(getCookie('address'))
+			if (getCookie('code')==201) {
+				$('input[type=user]').val(getCookie('name'))
+				$('input[type=password]').val(getCookie('password'))  
+				$('input[type=phone]').val(getCookie('phone'))
+				$('input[type=email]').val(getCookie('email'))
+				$('input[type=text]').val(getCookie('address'))
+			}else if (getCookie('code')==200) {
+				$('input[type=user]').val(getCookie('name'))
+				$('input[type=password]').val(getCookie('password'))  
+				$('input[type=phone]').val(getCookie('phone'))
+				$('input[type=email]').val(getCookie('email'))
+				$('input[type=text]').val(getCookie('address'))
+			}else{
+				window.location.href="index.html"
+			}
+
+			$('#confirm').click(function () {
+				if (getCookie('code')==200) {
+				var json={	//目的是获取当前input里的value，将其封装成对象传到接口里
+					id: getCookie('id'),
+					username: $('input[type=user]').val(),
+					password: $('input[type=password]').val(),
+					phone: $('input[type=phone]').val(),
+					email: $('input[type=email]').val(),
+					address: $('input[type=text]').val()
+				}
+				$.post('http://192.168.19.124:8080/SportsMall/updatemessage', json,function (data, status, xhr) {
+					console.log(data)
+					var obj=JSON.parse(data)//老样子，将返回的json转换为object
+					// console.log(obj)	
+					if (obj.code==301) {//成功修改返回的code值让组长设成301
+						//这里先清除登录时存入的Cookie,然后再设置成obj里对应的数据
+						clearCookie('id')
+						clearCookie('name')
+						clearCookie('password')
+						clearCookie('phone')
+						clearCookie('email')
+						clearCookie('address')
+						setCookie('id', obj.id, 1)
+						setCookie('name', obj.username, 1)
+						setCookie('password', obj.password, 1)
+						setCookie('phone', obj.phone, 1)
+						setCookie('email', obj.email, 1)
+						
+						setCookie('address', obj.address, 1)
+						
+						alert('修改成功，点击确定后刷新页面')
+						window.location.href = "personal.html"
+					}else{
+						alert('修改失败')
+					}
+				})
+				}
+				else if (getCookie('code')==201) {
+				var json={	//目的是获取当前input里的value，将其封装成对象传到接口里
+					id: getCookie('id'),
+					loginname: $('input[type=user]').val(),
+					password: $('input[type=password]').val(),
+					phone: $('input[type=phone]').val(),
+					email: $('input[type=email]').val(),
+					address: $('input[type=text]').val()
+				}
+				$.post('http://192.168.19.124:8080/SportsMall/adminupdate', json,function (data, status, xhr) {
+					console.log(data)
+					var obj=JSON.parse(data)//老样子，将返回的json转换为object
+					// console.log(obj)	
+					if (obj.code==301) {//成功修改返回的code值让组长设成301
+						//这里先清除登录时存入的Cookie,然后再设置成obj里对应的数据
+						clearCookie('id')
+						clearCookie('name')
+						clearCookie('password')
+						clearCookie('phone')
+						clearCookie('email')
+						clearCookie('address')
+						setCookie('id', obj.id, 1)
+						setCookie('name', obj.loginname, 1)
+						setCookie('password', obj.password, 1)
+						setCookie('phone', obj.phone, 1)
+						setCookie('email', obj.email, 1)
+						setCookie('address', obj.address, 1)
+						alert('修改成功，点击确定后刷新页面')
+						window.location.href = "personal.html"
+					}else{
+						alert('修改失败')
+					}
+				})
+				}
+			})
+
+			$('#del').click(function () {
+				if (getCookie('code')==200) {
+				var json={	//目的是获取当前input里的value，将其封装成对象传到接口里
+					id: getCookie('id'),
+				}
+				$.post('http://192.168.19.124:8080/SportsMall/userdelete', json,function (data, status, xhr) {
+					console.log(data)
+					// var obj=JSON.parse(data)//老样子，将返回的json转换为object
+					// console.log(obj)	
+					if (data==302) {//成功修改返回的code值让组长设成301
+						//这里先清除登录时存入的Cookie,然后再设置成obj里对应的数据
+						clearCookie('code')
+						clearCookie('id')
+						clearCookie('name')
+						clearCookie('password')
+						clearCookie('phone')
+						clearCookie('email')
+						clearCookie('address')
+						alert('删除成功')
+						window.location.href = "login.html"
+					}else{
+						alert('删除失败')
+					}
+				})
+				}
+				else if (getCookie('code')==201) {
+				var json={	//目的是获取当前input里的value，将其封装成对象传到接口里
+					id: getCookie('id'),
+				}
+				$.post('http://192.168.19.124:8080/SportsMall/admindelete', json,function (data, status, xhr) {
+					console.log(data)
+					// var obj=JSON.parse(data)//老样子，将返回的json转换为object
+					// console.log(obj)	
+					if (data==303) {//成功修改返回的code值让组长设成301
+						//这里先清除登录时存入的Cookie,然后再设置成obj里对应的数据
+						clearCookie('code')
+						clearCookie('id')
+						clearCookie('name')
+						clearCookie('password')
+						clearCookie('phone')
+						clearCookie('email')
+						clearCookie('address')
+						alert('删除成功')
+						window.location.href = "login.html"
+					}else{
+						alert('删除失败')
+					}
+				})
+				}
+			})
+
+			$('#back').click(function () {
+				window.location.href = "index.html"
+			})
+		})
+	</script>
+</head>
+
+<body>
+	<p id="header">修改个人信息界面</p>
+	<div id="user">
+		<div class="input">
+			<li><span><i class="iconfont icon-yonghu"></i></span>
+				用户名：<input type="user" name="user">
+		</div>
+		<div class="input1">
+			<li style="margin-left: 34px;"><span><i class="iconfont icon-mimacopy"></i></span>
+				密码：<input type="password" name="password">
+		</div>
+		<div class="input2">
+			<li><span><i class="iconfont icon-shoujihao"></i></span>
+				手机号：<input type="phone" name="phone">
+		</div>
+		<div class="input3">
+			<li style="margin-left: 34px;"><span><i class="iconfont icon-youxiang"></i></span>
+				邮箱：<input type="email" name="email">
+		</div>
+		<div class="input4">
+			<li style="margin-left: 34px;"><span><i class="iconfont icon-dizhi"></i></span>
+				地址：<input type="text" name="text">
+		</div>
+		<button id="confirm">确认修改</button>
+		<button id="del">删除</button>
+		<button id="back">返回</button>
+	</div>
+</body>
+
+</html>

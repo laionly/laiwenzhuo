@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1473973_wmm1qnjhr1.css" />
+		<link rel="stylesheet" type="text/css" href="css/orderlist.css"/>
+	</head>
+	<body>
+		<div class="box">
+			<h2 style="text-align: center;">确认订单</h2>
+			<div class="adrress">
+				<p class="user">张三<span>12343256463</span></p>
+				<p class="logo"><span class="iconfont icon-dizhi"></span>
+					广西壮族自治区   南宁市   西乡塘区   西乡塘街道   广西民族大学相思湖学院
+				</p>
+			</div>
+			<p class="qingdan">商品清单1件</p>
+			<div class="tu">
+				<img src="images/篮球/lanqiu13.jpg"width="120px"height="120px">
+				<span class="head">乔丹篮球官方正品成人专用7号球学生室外蓝球真皮手感耐磨篮球AOA</span>
+				<li>￥345.00
+				<span style="color: #000000;float: right;">x1</span>
+				</li>
+			</div>
+			<div class="xingxi">
+				<p>订单编号：1243124325535</p>
+				<p>商品总价 <span>345.00</span></p>
+				<p>折扣价 <span>145.00</span></p>
+				<p>订单总价 <span>145.00</span></p>
+				<button>确认提交</button>
+			</div>
+			
+		</div>
+	<!-- 	<table border="" cellspacing="0" cellpadding="0" style="margin: 0 auto;text-align: center;">
+			<tr>
+				<td colspan="5"style="background-color: bisque;">订单列表</td>
+				
+  			</tr>
+			<tr style="background-color: yellow;">
+				<td>订单编号</td>
+				<td>单价</td>
+				<td>数量</td>
+				<td>小计</td>
+				<td>操作</td>
+			</tr>
+			<c:forEach items="${order.orderItems}" var="entry"> 
+			<tr>
+				<td>${order.id}</td>
+				<td>${entry.product.price}</td>
+				<td>${entry.count}</td>
+				<td>${entry.price}</td>
+				<%-- <td><a href="deleteItem?id=${entry.value.product.id}">删除</a></td> --%>
+			</tr>
+			</c:forEach>
+			<%-- <tr>
+				<td colspan="2">总价</td>
+				<td colspan="2">${cart.price}</td>
+				<td>清空购物车</td>
+			</tr>
+			
+			
+			<tr>
+				<td colspan="5"><a href="UserAddOrderServlet"><button id="btn">提交订单</button></a></td>
+			</tr> --%>
+		</table> -->
+	</body>
+</html>

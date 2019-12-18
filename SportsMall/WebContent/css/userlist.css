@@ -1,0 +1,44 @@
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul,li {
+            list-style: none;
+        }
+
+        .middle {
+            width: 1000px;
+            margin: 0 auto;
+            border: 1px solid red;
+        }
+
+        ul {
+            margin: 30px;
+            border: 1px solid black;
+        }
+
+        .del {
+            position: absolute;
+            margin-left: 640px;
+            margin-top: -55px;
+        }
+
+        .upade {
+            position: absolute;
+            margin-left: 680px;
+            margin-top: -55px;
+        }
+
+        .sure {
+            position: absolute;
+            margin-left: 720px;
+            margin-top: -55px;
+        }
+
+        td{
+            width: 200px;
+            border: 1px solid gold;
+            text-align: center;
+        }

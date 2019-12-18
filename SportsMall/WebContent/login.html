@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1473987_p34tlh0h33f.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <script src="jquery-2.2.4.min.js"></script>
+    <script src="js/cookie.js"></script>
+    <script src="js/footer.js"></script>
+    
+    <script>
+         $(document).ready(function () {
+            // setCookie('code', 201, 1)
+            // setCookie('id',1,1)
+            // setCookie('name', 'username', 1)
+            // setCookie('password', 'password', 1)
+            // setCookie('phone', 1231231123, 1)
+            // setCookie('email', 'obj.emial', 1)
+            // setCookie('address', 'obj.address', 1)
+            // 这两句是判断用户是否处于登录状态的，原理是成功登录之后将名为code的cookie存入浏览器，getCookie获取，以此判断是否登录
+                if (getCookie('code')== 200) {
+                    alert('您已成功登录，点击确定返回首页')
+                    window.location.href = "index.html"
+                }else if(getCookie('code')==201){
+                    alert('您已成功登录，点击确定返回首页')
+                    window.location.href = "index.html"
+                }
+            // 用户登录按钮的点击事件
+            $('#u').click(function () {        
+                if ($('.denglu input[type=user]').val() == '') {
+                    alert('未填写用户名!')
+                } else if ($('.denglu input[type=password]').val() == '') {
+                    alert('未填写密码!')
+                } else if (($('.denglu input[type=user]').val().length < 1 || $(
+                        '.denglu input[type=user]').val().length > 15) ||
+                    $('.denglu input[type=password]').val().length > 9
+                ) {
+                    alert('请按正确规则填写')
+                } else if (($('.denglu input[type=user]').val().length >= 1 && $(
+                        '.denglu input[type=user]').val().length <= 15) &
+                    $('.denglu input[type=password]').val().length <= 9
+                ) {
+                    var json = {//将input值封装成一个对象
+                        username: $('.denglu input[type=user]').val(),
+                        password: $('.denglu input[type=password]').val()
+                    }
+                    // 连接接口，传上面封装好的对象，然后将接口传回来的json转成object。
+                    $.post('http://192.168.19.124:8080/SportsMall/loginuser', json, function (data,status,xhr) {
+                        console.log(data)
+                        var obj = JSON.parse(data)  //把json转成object
+                        console.log(obj)  
+                        if (obj.code == 200) {  //返回的code值是200，就会进行以下操作：把传回来的东西存入Cookie里，方便修改个人信息界面打印数据
+                            alert('用户登录成功，点击确定后返回首页')
+                            setCookie('code', 200, 1)
+                            setCookie('id',obj.id,1)
+                            setCookie('name', obj.username, 1)
+                            setCookie('password', obj.password, 1)
+                            setCookie('phone', obj.phone, 1)
+                            setCookie('email', obj.email, 1)
+                            
+                            setCookie('address',obj.address, 1)
+                            window.location.href = "index.html"
+                        } else {
+                            alert('登录失败')
+                        }
+                    })
+                }
+            })
+
+            //管理员登录按钮的点击事件
+            $('#a').click(function () {         
+                if ($('.denglu input[type=user]').val() == '') {
+                    alert('未填写用户名!')
+                } else if ($('.denglu input[type=password]').val() == '') {
+                    alert('未填写密码!')
+                } else if (($('.denglu input[type=user]').val().length < 1 || $(
+                        '.denglu input[type=user]').val().length > 15) ||
+                    $('.denglu input[type=password]').val().length > 9
+                ) {
+                    alert('请按正确规则填写')
+                } else if (($('.denglu input[type=user]').val().length >= 1 && $(
+                        '.denglu input[type=user]').val().length <= 15) &
+                    $('.denglu input[type=password]').val().length <= 9
+                ) {
+                    var json = {   //将input值封装成一个对象
+                        username: $('.denglu input[type=user]').val(),
+                        password: $('.denglu input[type=password]').val()
+                    }
+                    // 连接接口，传上面封装好的对象，然后将接口传回来的json转成object。
+                    $.post('http://192.168.19.124:8080/SportsMall/loginadmin',json,function(data,status,xhr){    
+                        console.log(data)
+                        var obj = JSON.parse(data)  //把json转成object
+                        // console.log(obj)  这个obj就是将接口传回来的东西转成object对象，你想知道里面有什么就console.log
+                        if (obj.code == 201) {  //返回的code值是201，就会进行以下操作：把传回来的东西存入Cookie里，方便修改个人信息界面打印数据
+                            alert('管理员登录成功，点击确定后返回首页')
+                            setCookie('code', 201, 1)
+                            setCookie('id',obj.id,1)
+                            setCookie('name', obj.loginname, 1)
+                            setCookie('password', obj.password, 1)
+                            setCookie('phone', obj.phone, 1)
+                            setCookie('email', obj.email, 1)
+                            setCookie('address', obj.address, 1)
+                            window.location.href = "index.html"
+                        } else {
+                            alert('登录失败')
+                        } 
+                    })
+                }
+            })
+            
+            //登录表单失去焦点事件
+            $('.denglu input[type=user]').blur(function () {
+                $(this).css('border-color', '')
+                if ($(this).val() == '') {
+                    $(this).css('border-color', 'red')
+                    $(this).attr('placeholder', '未填写用户名!')
+                } else if ($(this).val().length < 1) {
+                    alert('用户名不得小于1个字符!')
+                    $(this).css('border-color', 'red')
+                } else if ($(this).val().length > 15) {
+                    alert('用户名不得大于15个字符!')
+                    $(this).css('border-color', 'red')
+                }
+            })
+            $('.denglu input[type=password]').blur(function () {
+                $(this).css('border-color', '')
+                if ($(this).val() == '') {
+                    $(this).css('border-color', 'red')
+                    $(this).attr('placeholder', '未填写密码!')
+                } else if ($(this).val().length > 9) {
+                    alert('密码不得大于9个字符!')
+                    $(this).css('border-color', 'red')
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+
+    <!-- header顶部导航 -->
+    <div class="header">
+        <div class="header-wrap">
+            <!-- 顶部导航左模块 -->
+            <div class="header-left">
+                <div class="menu">
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="ProductListServlet">商城</a></li>
+                        <li><a href="lianxi.html">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="middlebg">
+        <div class="middle">
+            <!-- 左边文字介绍 -->
+            <ul class="zuo">
+                <li>篮球，英文（basketball），起源于美国马萨诸塞州，</li>
+                <span>是1891年12月21日由詹姆斯·奈史密斯创造，是奥运</span>
+                <li>会核心比赛项目，是以手为中心的身体对抗性体育运动</li>
+                <li>1891年12月21日，由美国马萨诸塞州斯普林菲尔德</li>
+                <span>基督教青年会训练学校体育教师詹姆士·奈史密斯发明 。</span>
+                <li>1896年，篮球运动传入中国，并且2002年姚明以状元</li>
+                <span>的身份入选NBA，开启了中国篮球新的狂潮。</span>
+            </ul>
+            <!-- 中部跳转到注册页面的按钮 -->
+            <a href="zhuce.html"><button class="chuang">创建一个账号</button></a>
+            <!-- 登录表单 -->
+            <form>
+                <div class="denglu">
+                    <span>登录</span>
+                    <p>用户名:</p>
+                    <input type="user" placeholder="请输入用户名">
+                    </p>
+                    <p>密码:</p>
+                    <input type="password" placeholder="请输入密码">
+                    <a id="a" href="#"><button class="button" type="button">管理员登录</button></a>
+                    <a id="u" href="#"><button class="button" type="button">用户登录</button></a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 底部导航,套用index.html的模板 -->
+    <div class="footer">
+        <div class="footer-wrap">
+            <div class="row">
+                <div class="footer-ul">
+                    <ul>
+                        <h4>商品</h4>
+                        <li><a href="#">篮球</a></li>
+                        <li><a href="#">足球</a></li>
+                        <li><a href="#">羽毛球</a></li>
+                    </ul>
+                </div>
+                <div class="footer-ul">
+                    <ul>
+                        <h4>关于</h4>
+                        <li><a href="#">价格</a></li>
+                        <li><a href="#">质量</a></li>
+                        <li><a href="#">保障
+                            </a></li>
+                    </ul>
+                </div>
+                <div class="footer-ul">
+                    <ul>
+                        <h4>客户支持</h4>
+                        <li><a href="lianxi.html">联系我们</a></li>
+                        <li><a href="#">订单跟踪</a></li>
+                        <li><a href="personal.html">个人信息</a></li>
+                    </ul>
+                </div>
+                <div class="footer_bottom">
+                    <div class="copy">
+                        <p>世纪之歌小组.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

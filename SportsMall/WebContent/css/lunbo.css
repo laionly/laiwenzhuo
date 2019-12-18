@@ -1,0 +1,79 @@
+/* index.html轮播部分 */
+.lunbowrap {
+    width: 1263px;
+    height: 400px;
+    overflow: hidden;
+    margin: 0;
+    position: relative;
+}
+
+.img img {
+    width: 1263px;
+    height: 400px;
+}
+
+/* 手动播放 */
+.divbottom {
+    display: none;
+    width: 800px;
+    height: 100px;
+    position: absolute;
+    top: 300px;
+    left: 200px;
+}
+
+/* .divbottom-background {
+    width: 800px;
+    height: 100px;
+    border-radius: 10px;
+    background: black;
+    opacity: 0.3;
+} */
+
+.divbottom span {
+    font-size: 55px;
+    font-weight: 1000;
+    color: blanchedalmond;
+    position: absolute;
+}
+
+span:hover {
+    cursor: pointer;
+    color: yellow;
+}
+
+#span1 {
+    top: -144px;
+    left: -150px;
+}
+
+#span2 {
+    top: -144px;
+    left: 976px;
+}
+
+#divbottom-li {
+    position: relative;
+}
+
+#divbottom_u {
+    float: left;
+    position: absolute;
+    bottom: 20px;
+    right: 456px;
+}
+
+#divbottom_u li {
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin-right: 45px;
+    text-align: center;
+    border-radius: 100%;
+    /* line-height: 30px; */
+    list-style: none;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    color: black;
+    background: gold;
+}

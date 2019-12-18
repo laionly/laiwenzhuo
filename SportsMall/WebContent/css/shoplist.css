@@ -1,0 +1,602 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: black;
+}
+
+.header {
+    background: black;
+}
+
+/* ————————————————————————————————————————————————用户导航———————————————————————————————————————————————————— */
+.header-wrap {
+    /* display: none; */
+    width: 1200px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+/* 导航左 */
+.header-left {
+    width: 672px;
+    float: left;
+    margin: 20px 40px 20px 30px;
+    /* 上右下左 */
+}
+
+.menu {
+    margin-left: 20px;
+    margin-top:10px;
+    display: inline-block;
+}
+
+.menu ul {
+    list-style: none;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+
+.menu li {
+    margin: 5px 2px 14px 18px;
+    float: left;
+}
+
+.menu a{
+    text-decoration: none;
+    color:white;
+    font-size: 20px;
+    padding: 4px 16px 4px 16px;
+}
+#shopplist-1{
+    cursor: pointer;
+    color: #000;
+    background: white;
+}
+.menu a:hover {
+    cursor: pointer;
+    color: #000;
+    background: white;
+}
+
+
+/* 导航右 */
+.header-right {
+    height: 40px;
+    float: right;
+    margin: 30px;
+}
+
+.header-right ul {
+    list-style: none;
+    color: white;
+}
+
+.header-right li {
+    float: left;
+    font-size: 26px;
+    margin: 10px;
+    cursor: pointer;
+}
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+/* ————————————————————————————————————————登录、注册、登出、个人信息都在这—————————————————————————————————————— */
+.yonghu{
+    display: none;
+    width: 170px;
+    height: 80px;
+    position: relative;
+    top: 102px;
+    left: 988px;
+    z-index: 100;
+}
+.yonghubg{
+    width: 170px;
+    height: 80px;
+    background-color:white;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+.yonghu button{
+    background: gold;
+    border:1px solid snow;
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    position: relative;
+    top: -80px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.yonghu1{
+    display: none;
+    width: 170px;
+    height: 80px;
+    position: relative;
+    top: 102px;
+    left: 988px;
+    z-index: 100;
+}
+.yonghubg1{
+    width: 170px;
+    height: 80px;
+    background-color:white;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+.yonghu1 button{
+    background: gold;
+    border:1px solid snow;
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    position: relative;
+    top: -80px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.yonghu2{
+    display: none;
+    width: 170px;
+    height: 80px;
+    position: relative;
+    top: 102px;
+    left: 988px;
+    z-index: 100;
+}
+.yonghubg2{
+    width: 170px;
+    height: 80px;
+    background-color:white;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+.yonghu2 button{
+    background: gold;
+    border:1px solid snow;
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    position: relative;
+    top: -80px;
+    left: 20px;
+    cursor: pointer;
+}
+/* —————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+/* ———————————————————————————————————————————管理员导航——————————————————————————————————————————————————— */
+.header1-wrap {
+    display: none;
+    width: 1200px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+/* 导航左 */
+.header1-left {
+    width: 672px;
+    float: left;
+    margin: 20px 40px 20px 30px;
+}
+
+.menu1 {
+    margin-left: 20px;
+    margin-top:10px;
+    display: inline-block;
+}
+
+.menu1 ul {
+    list-style: none;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+
+.menu1 li {
+    margin: 5px 2px 14px 18px;
+    float: left;
+}
+
+.menu1 a{
+    text-decoration: none;
+    color:white;
+    font-size: 20px;
+    padding: 4px 16px 4px 16px;
+}
+#shopplist-1{
+    cursor: pointer;
+    color: #000;
+    background: white;
+}
+.menu1 a:hover {
+    cursor: pointer;
+    color: #000;
+    background: white;
+}
+
+/* 导航右 */
+.header1-right {
+    height: 40px;
+    float: right;
+    margin: 30px;
+}
+
+.header1-right ul {
+    list-style: none;
+    color: white;
+}
+
+.header1-right li {
+    float: left;
+    font-size: 26px;
+    margin: 10px;
+    cursor: pointer;
+}
+/* ———————————————————————————————————————————————————————————————————————————————————— */
+
+/* 主体 */
+.middle {
+    margin: 0 auto;
+    width: 1263px;
+}
+
+.middle ul,
+li {
+    list-style: none;
+}
+
+.nav {
+    width: 1240px;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.nav li {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.nav a {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 10px;
+    background: #FFFF00;
+    color: #000000;
+    text-decoration: none;
+    text-align: center;
+    margin-left: 170px;
+    font-size: 30px;
+}
+
+.nav a:hover {
+    color: red;
+}
+
+/* box */
+.box {
+    /* display: none; */
+    height: 636px;
+    width: 1263px;
+    margin-top: 10px;
+    background-color: lavender;
+}
+
+.box li {
+    float: left;
+    margin-left: 13px;
+    margin-top: 12px;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.box del {
+    color: #FFD700;
+    font-size: 25px;
+}
+
+.box p {
+    float: left;
+    width: 300px;
+    height: 200px;
+    bottom: -155px;
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    transition: 1s;
+    background-color: rgba(130, 127, 130, 0.5);
+}
+
+.box p span {
+    display: block;
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+}
+
+.box li:hover p {
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+/* box */
+
+/* box1 */
+.box1 {
+    display: none;
+    height: 636px;
+    width: 1263px;
+    margin-top: 10px;
+    background-color: lavender;
+}
+
+.box1 li {
+    float: left;
+    margin-left: 13px;
+    margin-top: 12px;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.box1 del {
+    color: #FFD700;
+    font-size: 25px;
+}
+
+.box1 p {
+    float: left;
+    width: 300px;
+    height: 200px;
+    bottom: -155px;
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    transition: 1s;
+    background-color: rgba(130, 127, 130, 0.5);
+}
+
+.box1 p span {
+    display: block;
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+}
+
+.box1 li:hover p {
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+/* box1 */
+
+/* box2 */
+.box2 {
+    display: none;
+    height: 636px;
+    width: 1263px;
+    margin-top: 10px;
+    background-color: lavender;
+}
+
+.box2 li {
+    float: left;
+    margin-left: 13px;
+    margin-top: 12px;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.box2 del {
+    color: #FFD700;
+    font-size: 25px;
+}
+
+.box2 p {
+    float: left;
+    width: 300px;
+    height: 200px;
+    bottom: -155px;
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    transition: 1s;
+    background-color: rgba(130, 127, 130, 0.5);
+}
+
+.box2 p span {
+    display: block;
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+}
+
+.box2 li:hover p {
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+/* box2 */
+
+/* box3 */
+.box3 {
+    display: none;
+    height: 636px;
+    width: 1263px;
+    margin-top: 10px;
+    background-color: lavender;
+}
+
+.box3 li {
+    float: left;
+    margin-left: 13px;
+    margin-top: 12px;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.box3 del {
+    color: #FFD700;
+    font-size: 25px;
+}
+
+.box3 p {
+    float: left;
+    width: 300px;
+    height: 200px;
+    bottom: -155px;
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    transition: 1s;
+    background-color: rgba(130, 127, 130, 0.5);
+}
+
+.box3 p span {
+    display: block;
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+}
+
+.box3 li:hover p {
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+/* box3 */
+
+/* box4 */
+.box4 {
+    display: none;
+    height: 636px;
+    width: 1263px;
+    margin-top: 10px;
+    background-color: lavender;
+}
+
+.box4 li {
+    float: left;
+    margin-left: 13px;
+    margin-top: 12px;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.box4 del {
+    color: #FFD700;
+    font-size: 25px;
+}
+
+.box4 p {
+    float: left;
+    width: 300px;
+    height: 200px;
+    bottom: -155px;
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    transition: 1s;
+    background-color: rgba(130, 127, 130, 0.5);
+}
+
+.box4 p span {
+    display: block;
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+}
+
+.box4 li:hover p {
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+/* box4 */
+
+/* 主体 */
+
+/* 底部信息栏 */
+.footer {
+    background: black;
+}
+
+.footer-wrap {
+    height: 170px;
+}
+
+.row {
+    width: 1200px;
+    height: 150px;
+    margin: 0 auto;
+    /*position: absolute;*/
+}
+
+.footer-ul ul {
+    float: left;
+    color: white;
+    list-style: none;
+    margin: 30px 200px 30px 140px;
+}
+
+.footer-ul a {
+    text-decoration: none;
+    font-size: 12px;
+    color: white;
+}
+
+.footer-ul a:hover {
+    color: yellow;
+}
+
+.footer_bottom {
+    color: gainsboro;
+    font-size: 12px;
+}
+
+.copy {
+    width: 800px;
+    height: 20px;
+    margin: 0 auto;
+    margin-left: 100px;
+}
+
+/* 底部信息栏 */

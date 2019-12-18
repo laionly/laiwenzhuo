@@ -1,0 +1,159 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background-color: black;
+}
+
+#header{   
+	width: 499.5px;
+	height: 40px;
+	font-size: 24px;
+	text-align: center;
+	margin: 20px auto;
+	margin-bottom: 0;
+	line-height: 40px;
+	background-color: gold;
+	/* border-radius: 10px; */
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+#header p{
+	text-align: center;
+}
+/* F5DEB3样式 */
+.iconfont{
+	font-size: 29px;
+	color:gray;
+}
+
+#user{
+	width: 500px;
+	height: 500px;
+	border: 1px solid black;
+	background-color: #F5DEB3;
+	margin: 0 auto;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+#user div{
+	margin-top: 30px;
+	margin-left: -10px;
+}
+ #user li{
+	list-style-type: none;
+	margin-top: 20px;
+	margin-left: 15px;
+	font-size: 20px;
+}
+
+.input span{
+	width: 32px;
+	height: 35px;
+	position:relative;
+    left:115px;
+    top: 7px;
+    text-align: center;
+}
+.input input{
+	width: 300px;
+	height: 32px;
+	margin-top: 10px;
+	padding-left: 32px;
+	border:1px solid black;
+	
+}
+
+.icon-mimacopy{
+	font-size: 29px;
+	color:gray;
+}
+.input1 span{
+	width: 32px;
+	height: 35px;
+    left:95px;
+    top: 7px;
+    text-align: center;
+    line-height: 35px;
+	position:relative;
+}
+.input1 input{
+	width: 300px;
+	height: 32px;
+	margin-top: 10px;
+	padding-left: 32px;
+	border:1px solid black;
+	
+}
+
+.input2 span{
+	width: 32px;
+	height: 35px;
+    left:115px;
+    top: 7px;
+    text-align: center;
+    /*line-height: 25px;*/
+	position:relative;
+}
+.input2 input{
+	
+	width: 300px;
+	height: 32px;
+	margin-top: 10px;
+	padding-left: 31px;
+	border:1px solid black;
+	
+}
+
+.input3 span{
+	width: 32px;
+	height: 35px;
+    left:97px;
+    top: 7px;
+    text-align: center;
+    line-height: 35px;
+	position:relative;
+}
+.input3 input{
+	width: 300px;
+	height: 32px;
+	margin-top: 10px;
+	padding-left: 32px;
+	border:1px solid black;
+	
+}
+
+.input4 span{
+	width: 32px;
+	height: 35px;
+    left:95px;
+    top: 7px;
+    text-align: center;
+    line-height: 35px;
+	position:relative;
+}
+.input4 input{
+	width: 300px;
+	height: 32px;
+	margin-top: 10px;
+	padding-left:32px;
+	border:1px solid black;
+	
+}
+#user button{
+	width: 120px;
+	height: 35px;
+	background:green;
+	border: none;
+	border-radius: 10px;
+	float:left;
+	color: white;
+	font-weight: 800;
+	margin-left: 35px;
+	margin-top: 60px;
+	cursor: pointer;
+}
+#user button:hover{
+	background-color: #FF0000;
+}

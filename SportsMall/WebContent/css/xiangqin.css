@@ -1,0 +1,453 @@
+
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        background-color: black;
+    }
+    .header {
+        background: black;
+    }
+
+/* ————————————————————————————————————————————————用户导航———————————————————————————————————————————————————— */
+.header-wrap {
+    /* display: none; */
+    width: 1200px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+/* 导航左 */
+.header-left {
+    width: 672px;
+    float: left;
+    margin: 20px 40px 20px 30px;
+    /* 上右下左 */
+}
+
+.menu {
+    margin-left: 20px;
+    margin-top:10px;
+    display: inline-block;
+}
+
+.menu ul {
+    list-style: none;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+
+.menu li {
+    margin: 5px 2px 14px 18px;
+    float: left;
+}
+
+.menu a{
+    text-decoration: none;
+    color:white;
+    font-size: 20px;
+    padding: 4px 16px 4px 16px;
+}
+.menu a:hover {
+    cursor: pointer;
+    color: #000;
+    background: white;
+}
+
+
+/* 导航右 */
+.header-right {
+    height: 40px;
+    float: right;
+    margin: 30px;
+}
+
+.header-right ul {
+    list-style: none;
+    color: white;
+}
+
+.header-right li {
+    float: left;
+    font-size: 26px;
+    margin: 10px;
+    cursor: pointer;
+}
+/* ———————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+/* ————————————————————————————————————————登录、注册、登出、个人信息都在这—————————————————————————————————————— */
+.yonghu{
+    display: none;
+    width: 170px;
+    height: 80px;
+    position: relative;
+    top: 102px;
+    left: 988px;
+    z-index: 100;
+}
+.yonghubg{
+    width: 170px;
+    height: 80px;
+    background-color:white;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+.yonghu button{
+    background: gold;
+    border:1px solid snow;
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    position: relative;
+    top: -80px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.yonghu1{
+    display: none;
+    width: 170px;
+    height: 80px;
+    position: relative;
+    top: 102px;
+    left: 988px;
+    z-index: 100;
+}
+.yonghubg1{
+    width: 170px;
+    height: 80px;
+    background-color:white;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+.yonghu1 button{
+    background: gold;
+    border:1px solid snow;
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    position: relative;
+    top: -80px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.yonghu2{
+    display: none;
+    width: 170px;
+    height: 80px;
+    position: relative;
+    top: 102px;
+    left: 988px;
+    z-index: 100;
+}
+.yonghubg2{
+    width: 170px;
+    height: 80px;
+    background-color:white;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+.yonghu2 button{
+    background: gold;
+    border:1px solid snow;
+    padding: 10px;
+    font-size: 18px;
+    margin-right: 10px;
+    position: relative;
+    top: -80px;
+    left: 20px;
+    cursor: pointer;
+}
+/* —————————————————————————————————————————————————————————————————————————————————————————————————————————— */
+
+/* ———————————————————————————————————————————管理员导航——————————————————————————————————————————————————— */
+.header1-wrap {
+    display: none;
+    width: 1200px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+/* 导航左 */
+.header1-left {
+    width: 672px;
+    float: left;
+    margin: 20px 40px 20px 30px;
+}
+
+.menu1 {
+    margin-left: 20px;
+    margin-top:10px;
+    display: inline-block;
+}
+
+.menu1 ul {
+    list-style: none;
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+
+.menu1 li {
+    margin: 5px 2px 14px 18px;
+    float: left;
+}
+
+.menu1 a{
+    text-decoration: none;
+    color:white;
+    font-size: 20px;
+    padding: 4px 16px 4px 16px;
+}
+.menu1 a:hover {
+    cursor: pointer;
+    color: #000;
+    background: white;
+}
+
+/* 导航右 */
+.header1-right {
+    height: 40px;
+    float: right;
+    margin: 30px;
+}
+
+.header1-right ul {
+    list-style: none;
+    color: white;
+}
+
+.header1-right li {
+    float: left;
+    font-size: 26px;
+    margin: 10px;
+    cursor: pointer;
+}
+/* ———————————————————————————————————————————————————————————————————————————————————— */
+
+    /* 主体 */
+    .middle {
+        margin: 0 auto;
+        width: 1263px;
+        height: 800px;
+        background-color: #F5DEB3;
+        background-size:cover;
+        position: relative;
+    }
+    .middle ul,li{
+        list-style: none;
+    }
+    .show{
+        width: 450px;
+        height: 450px;
+        float: left;
+        margin-left: 50px;
+        margin-top: 124px;
+        display:inline-block;
+    }
+    h2{
+    	width: 600px;
+        height: 50px;
+        /*position: absolute;*/
+        /*left: 50px;
+        top: 46px;    */
+    }
+    .touwrap{
+        width: 600px;
+        height: 600px;
+        float: right;
+        border: 1px solid transparent;
+        /*position: relative;*/
+    }
+    .tou{
+    	width: 600px;
+    	height: 100px;
+    	background: #DCDCDC;
+        position: relative;
+        /*margin-top: 10px;*/
+    }
+    	h2{
+    	width: 600px;
+    	height: 100px;
+    	float:right;
+    	margin-top: 50px;
+    	margin-right: 20px;
+    }	
+    /*.tou p{
+    	margin-top: 10px;
+    }*/
+    .tou del{
+    	margin-top: 10px;
+    	margin-left: 20px;
+    	font-size: 25px;
+    }
+    .tou span{
+    	margin-left: 10px;
+    	color:red;
+    	font-size: 45px;
+    	font-weight:bold;
+    }
+  
+     .kuaidi span{
+    	display: inline-block;
+    	font-size: 18px;
+    	margin-left: 8px;
+    }
+     #yunfei{
+    	margin-right: 25px;
+    	color: gray;
+    }
+    .kuaidi{
+    	width: 600px;
+    	height: 30px;
+        position: relative;
+    	margin-top: 20px;
+    	margin-bottom: 20px;
+    }
+    .num1{
+    	/*position: relative;*/
+        margin-top: 20px;
+    }
+    .num1 span{
+    	margin-right: 50px;
+    	color: gray;
+    	font-size: 18px;
+    }
+    .num1 input{
+    	width: 45px;
+    	height: 30px;
+    }
+    .number{
+    
+    	width: 600px;
+    	height: 50px;
+    	border-top: 1px dotted gray;
+    	border-bottom: 1px dotted gray ;
+        position: relative;
+        line-height: 50px;
+        /*margin-top: 50px;*/
+    }
+    .number span{
+    	margin-right: 60px;
+    }
+    .button span{
+	width: 32px;
+	height: 35px;
+    left:20px;
+    top: 43px;
+    line-height: 35px;
+	position:relative;
+}
+  .button   button{
+     	font-size: 20px;
+    	float: right;
+    	width: 300px;
+    	height: 50px;
+    	border: none;
+    	color: white;
+    	margin-top: 100px;
+    	margin-right: 150px;
+    	cursor: pointer;
+    	border-radius: 10px;
+    	background: crimson;
+    	
+    }
+    .icon-gouwuche{
+        position: absolute;
+        top: 592px;
+        left: 840px;
+        z-index: 100;
+    	font-size: 40px;
+    	color: yellow;
+    }
+  
+	.kankan{
+			width: 400px;
+			height: 60px;
+			/*border: 1px solid black;*/
+			float: left;
+			overflow: hidden;
+			/*margin-left: 20px;*/
+		}
+	.kankan	li{
+			float: left;
+			margin-left:5px;
+			width: 50px;
+			height: 50px;
+		}
+	.kankan	img{
+			width: 50px;
+			height: 52px;
+		}
+		.ksmall{
+			margin-top: 10px;
+			/*margin-left: 20px;*/
+		}
+		.ksmall:hover{
+			border: 2px solid red;
+		}
+		#kbig{
+			float: left;
+			margin-left: 30px;
+			margin-top:80px ;
+			width: 550px;
+			height: 550px;
+		}
+		#kbig img{
+			width: 550px;
+			height: 550px;
+			position: relative;
+		}
+	
+    /* 主体 */
+
+ /* 底部信息栏 */
+ .footer {
+    background: black;
+}
+
+.footer-wrap {
+    height: 170px;
+}
+
+.row {
+    width: 1200px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.footer-ul ul {
+    float: left;
+    color: white;
+    list-style: none;
+    margin: 30px 200px 30px 140px;
+}
+
+.footer-ul a {
+    text-decoration: none;
+    font-size: 12px;
+    color: white;
+}
+
+.footer-ul a:hover {
+    color: yellow;
+}
+
+.footer_bottom {
+    color: gainsboro;
+    font-size: 12px;
+}
+
+.copy {
+    width: 800px;
+    height: 20px;
+    margin: 0 auto;
+    margin-left: 100px;
+}
+/* 底部信息栏 */
+
+
+

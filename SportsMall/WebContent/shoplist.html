@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商城</title>
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1473987_kibfmjoe139.css">
+    <link rel="stylesheet" type="text/css" href="css/shoplist.css">
+    <script src="jquery-2.2.4.min.js"></script>
+    <script src="js/shoplist.js"></script>
+    <script src="js/cookie.js"></script>
+    <script>
+         $(document).ready(function () {
+            if (getCookie('code') == 200) {        //200是用户登录
+                $('.icon-gouwuche').click(function(){
+                    window.location.href="ShowCartServlet"
+                })
+                $('.icon-icon-user').hover(function () {
+                    $('.yonghu1').css('display', 'block') //登出和个人信息框
+                })
+                $('.yonghu1').hover(function () {
+                    $('.yonghu1').css('display', 'block')
+                }, function () {
+                    $('.yonghu1').css('display', 'none')
+                })
+            } else if (getCookie('code') == 201) {  //201是管理员登录
+                $('.header-wrap').css('display','none')
+                $('.header1-wrap').css('display','block')
+                
+                $('.icon-icon-user').hover(function () {
+                    $('.yonghu2').css('display', 'block') //登出和个人信息框
+                })
+                $('.yonghu2').hover(function () {
+                    $('.yonghu2').css('display', 'block')
+                }, function () {
+                    $('.yonghu2').css('display', 'none')
+                })
+            } else {  //如果没有获取到Cookie值，也就是没登录成功，样式为以下
+                $('.header-wrap').css('display','block')
+                $('.header1-wrap').css('display','none')
+                $('.icon-gouwuche').click(function(){
+                    alert('您还未登录，请先登录')
+                    window.location.href="login.html"
+                })
+                $('.icon-icon-user').hover(function () {
+                    $('.yonghu').css('display', 'block') //登录和注册
+                })
+                $('.yonghu').hover(function () {
+                    $('.yonghu').css('display', 'block')
+                }, function () {
+                    $('.yonghu').css('display', 'none')
+                })
+            }
+
+            // 用户导航的登出和个人信息
+            $('.yonghu1 a').eq(0).click(function () {
+                clearCookie('code')
+                clearCookie('id')
+                clearCookie('name')
+                clearCookie('password')
+                clearCookie('phone')
+                clearCookie('email')
+                clearCookie('text')
+                alert('成功注销')
+                window.location.href = "index.html"
+            })
+            $('.yonghu1 a').eq(1).click(function () {
+                window.location.href = "personal.html"
+            })
+
+            // 管理员导航的登出和个人信息
+            $('.yonghu2 a').eq(0).click(function () {
+                clearCookie('code')
+                clearCookie('id')
+                clearCookie('name')
+                clearCookie('password')
+                clearCookie('phone')
+                clearCookie('email')
+                clearCookie('text')
+                alert('成功注销')
+                window.location.href = "index.html"
+            })
+            $('.yonghu2 a').eq(1).click(function () {
+                window.location.href = "personal.html"
+            })
+        })
+    </script>
+
+</head>
+
+<body>
+    <!-- header顶部导航-用户 -->
+    <div class="header">
+        <!-- 包裹左右模块的div -->
+        <div class="header-wrap">
+            <!-- 顶部导航左模块 -->
+            <div class="header-left">
+                <div class="menu">
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="shoplist.html">商城</a></li>
+                        <!-- <li><a href="">经验交流</a></li> -->
+                        <li><a href="lianxi.html">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 顶部导航右模块 -->
+            <div class="header-right">
+                <ul>
+                    <li class="iconfont icon-icon-user"><a href=""></a></li>
+                    <li class="iconfont icon-gouwuche"><a href=""></a></li>
+                </ul>
+            </div>
+            <!-- 划过图标出现div -->
+            <div class="yonghu">
+                <div class="yonghubg"></div>
+                <a href="login.html"><button>登录</button></a>
+                <a href="zhuce.html"><button>注册</button></a>
+            </div>
+            <!-- 登出和个人信息 -->
+            <div class="yonghu1">
+                <div class="yonghubg1"></div>
+                <a href="#"><button>登出</button></a>
+                <a href="#"><button>信息</button></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- header顶部导航-管理员——————————————————————————————————————————————————————————————————————————————————— -->
+    <div class="header1">
+        <!-- 包裹左右模块的div -->
+        <div class="header1-wrap">
+            <!-- 顶部导航左模块 -->
+            <div class="header1-left">
+                <div class="menu1">
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="shoplist.html">商品管理</a></li>
+                        <li><a href="user.html">管理员列表</a></li>
+                        <li><a href="user.html">用户管理</a></li>
+                        <!-- <li><a href="">订单管理</a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <!-- 顶部导航右模块 -->
+            <div class="header1-right">
+                <ul>
+                    <li class="iconfont icon-icon-user"><a href=""></a></li>
+                    <!-- <li class="iconfont icon-gouwuche"><a href=""></a></li> -->
+                </ul>
+            </div>
+            <!-- 划过用户图标出现的div -->
+            <div class="yonghu">
+                <div class="yonghubg"></div>
+                <a href="login.html"><button>登录</button></a>
+                <a href="zhuce.html"><button>注册</button></a>
+            </div>
+            <!-- 登录后更改信息 -->
+            <div class="yonghu2">
+                <div class="yonghubg2"></div>
+                <a href="#"><button>登出</button></a>
+                <a href="#"><button>信息</button></a>
+            </div>
+        </div>
+    </div>
+    <!-- —————————————————————————————————————————————————————————————————————————————————————————————————————— -->
+
+    <div class="middle">
+        <div class="nav">
+            <ul>
+                <li>
+                    <a id="bsk" href="#">篮球</a>
+                    <a id="ftb" href="#">足球</a>
+                    <a id="yumao" href="#">羽毛球</a>
+                    <a id="bingpang" href="#">兵乓球</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="box">
+            <li><a href=""><img src="images/商城/zuqiu1.jpg" width="300px" height="300">
+                    <p><span>价格：￥198</span><del>￥298</del><span style="color: #000000;">足球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/商城/bingpang1.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥398</del><span style="color: #000000;">兵乓球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/商城/lanqiu1.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥198</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/商城/yumaoqiu1.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥498</del><span style="color: #000000;">羽毛球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/商城/zuqiu2.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥598</del><span style="color: #000000;">足球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/商城/lanqiu2.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥598</del><span style="color: #000000;">篮球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/商城/yumaoqiu2.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥398</del><span style="color: #000000;">羽毛球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/商城/bingpang2.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥198</del><span style="color: #000000;">兵乓球拍</span></p>
+                </a></li>
+
+        </ul>
+        <ul class="box1">
+            <li><a href=""><img src="images/篮球/lanqiu11.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥398</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/篮球/lanqiu12.gif" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥198</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/篮球/lanqiu13.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥498</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/篮球/lanqiu14.jpg" width="300px" height="300">
+                    <p><span>价格：￥198</span><del>￥298</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/篮球/lanqiu15.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥598</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/篮球/lanqiu16.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥598</del><span style="color: #000000;">篮球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/篮球/lanqiu17.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥398</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/篮球/lanqiu18.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥198</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+
+        </ul>
+        <ul class="box2">
+            <li><a href=""><img src="images/足球/zuqiu1.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥398</del><span style="color: #000000;">兵乓球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/足球/zuqiu2.png" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥198</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/足球/zuqiu3.jpg" width="300px" height="300">
+                    <p><span>价格：￥198</span><del>￥298</del><span style="color: #000000;">足球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/足球/zuqiu4.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥498</del><span style="color: #000000;">羽毛球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/足球/zuqiu5.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥598</del><span style="color: #000000;">足球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/足球/zuqiu6.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥598</del><span style="color: #000000;">篮球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/足球/zuqiu7.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥398</del><span style="color: #000000;">羽毛球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/足球/zuqiu8.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥198</del><span style="color: #000000;">兵乓球拍</span></p>
+                </a></li>
+
+        </ul>
+        <ul class="box3">
+            <li><a href=""><img src="images/羽毛球/yumao1.gif" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥398</del><span style="color: #000000;">兵乓球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/羽毛球/yumao2 (1).jpg" width="300px" height="300">
+                    <p><span>价格：￥198</span><del>￥298</del><span style="color: #000000;">足球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/羽毛球/yumao3.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥198</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/羽毛球/yumao4.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥498</del><span style="color: #000000;">羽毛球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/羽毛球/yumao5.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥598</del><span style="color: #000000;">足球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/羽毛球/yumao6.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥598</del><span style="color: #000000;">篮球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/羽毛球/yumao7.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥398</del><span style="color: #000000;">羽毛球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/羽毛球/yumao3 (2).jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥198</del><span style="color: #000000;">兵乓球拍</span></p>
+                </a></li>
+
+        </ul>
+        <ul class="box4">
+            <li><a href=""><img src="images/兵乓球/bingpan1.jpg" height="300">
+                    <p><span>价格：￥199</span><del>￥398</del><span style="color: #000000;">兵乓球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/兵乓球/bingpan2.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥198</del><span style="color: #000000;">蓝球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/兵乓球/bingpan3.jpg" width="300px" height="300">
+                    <p><span>价格：￥198</span><del>￥298</del><span style="color: #000000;">足球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/兵乓球/bingpan4.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥498</del><span style="color: #000000;">羽毛球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/兵乓球/bingpan5.jpg" width="300px" height="300">
+                    <p><span>价格：￥199</span><del>￥598</del><span style="color: #000000;">足球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/兵乓球/bingpan6.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥598</del><span style="color: #000000;">篮球</span></p>
+                </a></li>
+            <li><a href=""><img src="images/兵乓球/bingpan7.jpg" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥398</del><span style="color: #000000;">羽毛球拍</span></p>
+                </a></li>
+            <li><a href=""><img src="images/兵乓球/bingpang8.png" width="300px" height="300">
+                    <p><span>价格：￥99</span><del>￥198</del><span style="color: #000000;">兵乓球拍</span></p>
+                </a></li>
+
+        </ul>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="footer">
+        <div class="footer-wrap">
+            <div class="row">
+                <div class="footer-ul">
+                    <ul>
+                        <h4>商品</h4>
+                        <li><a href="#">篮球</a></li>
+                        <li><a href="#">足球</a></li>
+                        <li><a href="#">羽毛球</a></li>
+                    </ul>
+                </div>
+                <div class="footer-ul">
+                    <ul>
+                        <h4>关于</h4>
+                        <li><a href="#">价格</a></li>
+                        <li><a href="#">质量</a></li>
+                        <li><a href="#">保障
+                            </a></li>
+                    </ul>
+                </div>
+                <div class="footer-ul">
+                    <ul>
+                        <h4>客户支持</h4>
+                        <li><a href="lianxi.html">联系我们</a></li>
+                        <li><a href="#">订单跟踪</a></li>
+                        <li><a href="personal.html">个人信息</a></li>
+                    </ul>
+                </div>
+                <div class="footer_bottom">
+                    <div class="copy">
+                        <p>世纪之歌小组.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
