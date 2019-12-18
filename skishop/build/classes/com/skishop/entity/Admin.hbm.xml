@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-11-19 23:45:27 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true" package="com.skishop.entity">
+    <class catalog="work" dynamic-insert="false" dynamic-update="false" mutable="true" name="Admin" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="admin">
+        <id name="email" type="string">
+            <column name="email"/>
+            <generator class="native"/>
+        </id>
+        <property generated="never" lazy="false" name="surname" optimistic-lock="true" type="string" unique="false">
+            <column name="surname" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="name" optimistic-lock="true" type="string" unique="false">
+            <column name="name"/>
+        </property>
+        <property generated="never" lazy="false" name="password" optimistic-lock="true" type="string" unique="false">
+            <column name="password"/>
+        </property>
+    </class>
+</hibernate-mapping>

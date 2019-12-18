@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-11-19 23:45:27 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true" package="com.skishop.entity">
+    <class catalog="work" dynamic-insert="false" dynamic-update="false" mutable="true" name="Product1012" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="product_1012">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="native"/>
+        </id>
+        <property generated="never" lazy="false" name="name" optimistic-lock="true" type="string" unique="false">
+            <column name="name"/>
+        </property>
+        <property generated="never" lazy="false" name="description" optimistic-lock="true" type="string" unique="false">
+            <column name="description"/>
+        </property>
+        <property generated="never" lazy="false" name="listimg" optimistic-lock="true" type="string" unique="false">
+            <column name="listimg"/>
+        </property>
+        <property generated="never" lazy="false" name="price" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="price"/>
+        </property>
+        <property generated="never" lazy="false" name="discountprice" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="discountprice"/>
+        </property>
+    </class>
+</hibernate-mapping>
