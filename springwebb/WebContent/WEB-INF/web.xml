@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>springweb</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- JavaWeb项目如何初始化IOC容器？
+  	思路：当tomcat服务器启动时，通过监听器初始化或者实例化容器；
+  		需要告诉监听器此容器的位置(context-param)
+  		 spring-web.jar-->
+  <!-- 1.配置IOC容器的位置，注意看ContextLoaderListener源码 
+  	   2.未指定IOC容器位置，会采用默认位置(WEB-INF/applicationContext.xml)，路径以及文件名必须一致
+  	             查看XmlWebApplicationContext类源码
+  -->
+  <context-param>
+  	<!-- 监听器的父类中有个变量值contextConfigLocation，该值保存着IOC容器的位置 -->
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:beans.xml</param-value>
+  </context-param>
+   <!-- 监听器<服务器一启动，加载配置文件> -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+</web-app>
