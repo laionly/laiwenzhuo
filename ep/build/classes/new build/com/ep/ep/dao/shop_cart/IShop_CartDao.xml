@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ep.ep.dao.shop_cart.IShop_CartDao">
+
+	<resultMap type="Shop_cart" id="ShopCartProductMap">
+		<result property="cid" column="cid" />
+		<result property="user_id" column="user_id" />
+		<result property="product_id" column="product_id" />
+		<result property="shoppingnum" column="shoppingnum" />
+		<result property="amount" column="amount" />
+		<association property="products" javaType="Product">
+			<result property="pid" column="pid" />
+			<result property="name" column="name" />
+			<result property="price" column="price" />
+			<result property="rprice" column="rprice" />
+			<result property="picture" column="picture" />
+		</association>
+	</resultMap>
+	<!-- 更新购物车信息 -->
+	<update id="updataShop_Cart" parameterType="Shop_cart">
+		update shop_cart set
+		shoppingnum=#{shoppingnum},amount=#{amount}
+		where cid=#{cid}
+	</update>
+	<!-- 级联查询购物车，商品信息 -->
+	<select id="findShop_CartByCid" resultMap="ShopCartProductMap">
+		select sc.*,p.* from shop_cart sc,product p where sc.cid=#{cid} and
+		sc.product_id=p.pid
+	</select>
+	<!-- 通过购物车项ID删除购物项(用于下单的同时清空购物车) -->
+	<delete id="deleteShop_CartByCid">
+	delete from shop_cart where cid=#{cid}
+	</delete>
+	<!-- 通过商品id查询购物车商品项() -->
+	<select id="findShop_cartByPid" resultType="Shop_cart">
+	select * from shop_cart sc where sc.product_id=#{pid}
+	</select>
+	<!-- 从收藏夹添加商品进购物车 -->
+	<insert id="addShop_cart" parameterType="user" useGeneratedKeys="true" 
+	keyProperty="cid">
+	insert into shop_cart(user_id,product_id,shoppingnum) values(#{uid},#{pid},
+	#{shoppingnum}) 
+	</insert>
+
+
+
+</mapper>

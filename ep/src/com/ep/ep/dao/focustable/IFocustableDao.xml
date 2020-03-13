@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ep.ep.dao.focustable.IFocustableDao">
+	<!-- <cache /> -->
+	<resultMap type="focustable" id="FoucstableProductMap">
+		<id property="fid" column="fid" />
+		<result property="pid" column="pid" />
+		<result property="uid" column="uid" />
+		<association property="product" javaType="product">
+			<id property="pid" column="pid" />
+			<result property="name" column="name" />
+			<result property="price" column="price" />
+			<result property="rprice" column="rprice" />
+			<result property="picture" column="picture" />
+		</association>
+	</resultMap>
+	<!-- 级联查看收藏夹，商品信息 -->
+	<select id="findFocustable" resultMap="FoucstableProductMap">
+		SELECT p.*,f.* from
+		focustable f,product p where f.uid=#{uid} and f.pid=p.pid
+	</select>
+	<delete id="deleteFocustableByPid">
+	delete from focustable f where f.pid=#{pid}
+	</delete>
+
+</mapper>

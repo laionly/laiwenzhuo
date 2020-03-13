@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ep.ep.dao.user.IUserDao">
+	<!-- <cache /> -->
+	<resultMap type="user" id="UserFocustableMap">
+		<id property="uid" column="uid" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="address" column="address" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+		<collection property="focustables" ofType="Focustable"
+			column="uid" select="com.ep.ep.dao.focustable.IFocustableDao.findFocustable">
+		</collection>
+	</resultMap>
+
+	<resultMap type="Shop_cart" id="ShopCartProductMap">
+		<id property="cid" column="cid" />
+		<result property="user_id" column="user_id" />
+		<result property="product_id" column="product_id" />
+		<result property="shoppingnum" column="shoppingnum" />
+		<result property="amount" column="amount" />
+		<association property="products" javaType="Product">
+	<id property="pid" column="pid" />
+	<result property="name" column="name" />
+	<result property="price" column="price" />
+	<result property="rprice" column="rprice" />
+	<result property="picture" column="picture" />
+
+		</association>
+	</resultMap>
+
+	<resultMap type="Orderbase" id="OrderbaseMap">
+		<result property="orid" column="orid" />
+		<result property="user_id" column="user_id" />
+		<result property="amount" column="amount" />
+		<result property="orderdate" column="orderdate" />
+		<result property="address" column="address" />
+		<result property="phone" column="phone" />
+		<result property="name" column="name" />
+	</resultMap>
+
+	<resultMap type="com.ep.ep.entity.Orderitem" id="OrderitemMap">
+		<id property="oid" column="oid" />
+		<result property="oderbase_id" column="oderbase_id" />
+		<result property="product_id" column="product_id" />
+		<result property="shopnum" column="shopnum" />
+		<result property="productname" column="productname" />
+		<result property="price" column="price" />
+		<result property="rprice" column="rprice" />
+		<result property="picture" column="picture" />
+	</resultMap>
+
+	<!-- 用户注册 -->
+	<insert id="addUser" parameterType="user" useGeneratedKeys="true"
+		keyProperty="id"> insert into user
+		(username,password,address,phone,email)
+		value(#{username},#{password},#{address},#{phone},#{email})
+	</insert>
+	<!-- 用户通过用户名和密码进行登录 -->
+	<select id="login" resultType="user">
+		select * from user where
+		username=#{username} and password=#{password}
+	</select>
+	<!-- 通过uid查找用户 -->
+	<select id="findUserByUid" resultType="user">
+		select * from user
+		where
+		uid=#{uid}
+	</select>
+	<!-- 更新用户信息 -->
+	<update id="updateUser" parameterType="user">
+		update user set
+		username=#{username},password=#{password},
+		address=#{address},phone=#{phone},email=#{email} where uid=#{uid}
+	</update>
+	<!-- 用户查看收藏夹 -->
+	<select id="checkFocustable" resultMap="UserFocustableMap">
+		select * from user where
+		uid=#{uid}
+	</select>
+	<!-- 用户查看购物车 -->
+	<select id="checkShopCart" resultMap="ShopCartProductMap">
+		select sc.*,p.* from
+		shop_cart sc,product p where sc.user_id=#{uid} and sc.product_id=p.pid
+	</select>
+	<!-- 用户下订单 -->
+	<insert id="place_orderByUid" parameterType="orderbase"
+		useGeneratedKeys="true" keyProperty="orid">
+		insert into orderbase
+		(user_id,amount,orderdate,address,phone,name)
+		value(#{user_id},#{amount},#{orderdate},#{address},#{phone},#{name})
+	</insert>
+	<!-- 级联插入订单详情 -->
+	<insert id="place_orderByOrid" parameterType="orderbase"
+		useGeneratedKeys="true" keyProperty="oid">
+		insert into
+		orderitem(oderbase_id,product_id,shopnum,productname,price,rprice,picture)value(#{oderbase_id},#{product_id},#{shopnum},#{productname},#{price},#{rprice},#{picture})
+	</insert>
+	<!-- 查看订单 -->
+	<select id="checkOrderByUid" resultMap="OrderbaseMap">
+		SELECT * from orderbase o
+		where o.user_id=#{uid} limit #{page},#{size};
+	</select>
+	<!-- 查询订单总数 -->
+	<select id="count" resultType="INT">
+		SELECT count(*) from orderbase o
+		where o.user_id=#{uid}
+	</select>
+	<!-- 查看详情订单 -->
+	<select id="checkOrderItemByOrdi" resultMap="OrderitemMap">
+		select * from orderitem o where o.oderbase_id=#{orid} limit #{page},#{size};
+	</select>
+	<!-- 查看商品数量 -->
+	<select id="productCount" resultType="INT">
+		SELECT COUNT(*) from orderitem o where o.oderbase_id=#{orid}
+	</select>
+	<!-- 注册时检测用户名是否重复 -->
+	<select id="findUserByUname" resultType="user">
+	select * from user where username=#{username}
+	</select>
+	<!-- 注册时检测邮箱地址是否重复 -->
+	<select id="findByEmail" resultType="user">
+	select * from user where email=#{email}
+	</select>
+	<!-- 注册时检测手机号是否重复 -->
+	<select id="findByPhone" resultType="user">
+	select * from user where phone=#{phone}
+	</select>
+
+
+</mapper>

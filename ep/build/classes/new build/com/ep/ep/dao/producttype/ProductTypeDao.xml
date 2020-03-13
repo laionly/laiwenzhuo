@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.ep.ep.dao.producttype.ProductTypeDao">
+  <insert id="saveProductType" parameterType="product_type">
+    insert into product_type (typename) value(#{typename})
+  </insert>
+  
+  <delete id="deleteProductType" parameterType="Integer">
+    delete from product_type where ptid=#{ptid}
+  </delete>
+  
+   <select id="findProductType" parameterType="Integer" 
+     resultType="Product_type">
+     select * from product_type where ptid=#{ptid}
+   </select>
+   
+   <select id="findAllProducttype" parameterType="product_type"
+   resultType="product_type">
+    select * from product_type
+   </select>
+</mapper>

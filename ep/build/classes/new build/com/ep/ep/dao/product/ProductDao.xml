@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ep.ep.dao.product.ProductDao">
+	<!--根据id查询出商品，同时使用映射查询出类型 -->
+	<select id="findProductById" parameterType="Integer" resultMap="productandtype">
+		select p.*,pt.typename
+		from product p,product_type pt
+		where p.pt_id=pt.ptid
+		and p.pid=#{pid}
+	</select>
+	<resultMap type="Product" id="productandtype">
+		<id property="pid" column="pid" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="rprice" column="rprice" />
+		<result property="picture" column="picture" />
+		<collection property="product_type" ofType="Product_type">
+		 <id property="ptid" column="pt_id"/>
+		 <result property="typename" column="typename"/>
+		</collection>
+	</resultMap>
+
+	<update id="updateProduct" parameterType="product">
+		update product set name=#{name},price=#{price},
+		rprice=#{rprice},picture=#{picture}
+		where uid=#{uid}
+	</update>
+
+	<insert id="insertProduct" parameterType="product">
+		insert into product (name,price,rprice,picture)
+		value (#{name},#{price},#{rprice},#{picture})
+	</insert>
+	
+
+	<delete id="deleteProduct" parameterType="Integer">
+		delete from product where pid=#{pid}
+	</delete>
+	
+	<select id="findAll" parameterType="product"
+	 resultMap="productsandtype">
+	select  *  from product p,product_type pt where p.pt_id=pt.ptid
+	 </select>
+	 
+  <resultMap type="Product" id="productsandtype">
+		<id property="pid" column="pid" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="rprice" column="rprice" />
+		<result property="picture" column="picture" />
+		<association property="product_type" javaType="Product_type">
+		 <id property="ptid" column="pt_id"/>
+		 <result property="typename" column="typename"/>
+		</association>
+	</resultMap>
+
+</mapper>

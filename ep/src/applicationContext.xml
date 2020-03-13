@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- 扫描带注解的类 -->
+	<context:component-scan base-package="com.ep.*"/>
+	<context:annotation-config/>
+	<!-- 指定属性文件的位置 -->
+	<context:property-placeholder location="classpath:dbinfo.properties"/>
+	<!-- 配置Spring内置数据源-->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	
+	<!-- 配置DBCP数据源 
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>-->
+	
+	<!-- 配置c3p0数据源 
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>-->
+	
+	 <!--配置SqlSessionFactory-->
+     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+         <!--加载Mybatis的配置文件-->
+         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+         <!--配置数据源-->
+         <property name="dataSource" ref="dataSource"></property>
+     </bean>
+     
+     <bean id="UserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+       <!--  配置mapper接口-->
+        <property name="mapperInterface" value="com.ep.ep.dao.user.IUserDao" ></property> 
+       <!--  配置SqlSessionFactory-->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean> 
+    
+    
+    
+    <bean id="FocustableMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+       <!--  配置mapper接口-->
+        <property name="mapperInterface" value="com.ep.ep.dao.focustable.IFocustableDao" ></property> 
+       <!--  配置SqlSessionFactory-->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean> 
+    
+    
+    <bean id="Shop_CartMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+       <!--  配置mapper接口-->
+        <property name="mapperInterface" value="com.ep.ep.dao.shop_cart.IShop_CartDao" ></property> 
+       <!--  配置SqlSessionFactory-->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean> 
+    
+    <bean id="ProductMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+     <property name="mapperInterface" value="com.ep.ep.dao.product.ProductDao" ></property> 
+     <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+    
+    <bean id="ProductTypeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+     <property name="mapperInterface" value="com.ep.ep.dao.producttype.ProductTypeDao" ></property> 
+     <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+    
+     <bean id="AdminMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+     <property name="mapperInterface" value="com.ep.ep.dao.admin.AdminDao" ></property> 
+     <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+    
+    
+	
+	<!-- 使用annotation定义事务 -->
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+  <tx:annotation-driven  transaction-manager="transactionManager"/> 
+</beans>
