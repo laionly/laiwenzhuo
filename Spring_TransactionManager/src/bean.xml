@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		<!-- 指定属性文件的位置 -->
+	    <context:property-placeholder location="classpath:dbinfo.properties"/>
+	    <!-- 开启自动扫描注解自动注入 -->
+	     <context:component-scan base-package="com.*"></context:component-scan> 
+	    
+		<!-- 配置AccountService 
+		<bean id="AccountService" class="com.Spring.TransactionManager.Service.Impl.AccountServiceImpl">
+		<property name="iAccountDao" ref="iAccountDao"></property>
+		</bean>-->
+		
+		<!-- 配置AccountDao 
+		<bean id="iAccountDao" class="com.Spring.TransactionManager.Dao.Impl.AccountDaoImpl">
+		<property name="Jdbctemplate" ref="Jdbctemplate"></property>
+		</bean>-->
+		
+		<!-- 配置jdbctemplate -->
+		<bean id="Jdbctemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+		</bean>
+		<!-- 配置数据源 -->
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	    <property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		</bean>
+		
+		<!-- 1、配置事务管理器 -->
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 注入数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+		</bean>
+		<!-- 配置spring开启注解事务的支持 -->
+		<tx:annotation-driven transaction-manager="transactionManager"/>
+		<!-- 在需要事务的地方使用@Transactional注解 -->
+		
+		<!-- 2、配置事务通知 
+		<tx:advice id="txadvice" transaction-manager="transactionManager">
+		<tx:attributes>
+		<tx:method name="transfer"  read-only="false" propagation="REQUIRED"/>
+		</tx:attributes>
+		</tx:advice>-->
+		<!-- 3、配置AOP 
+		<aop:config>
+		<aop:pointcut expression="execution(* com.Spring.TransactionManager.Service.Impl.*.*(..))" id="pointcut"/>
+		<aop:advisor advice-ref="txadvice" pointcut-ref="pointcut"/>
+		</aop:config>-->
+		
+		
+	</beans>	
+		

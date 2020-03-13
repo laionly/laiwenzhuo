@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 当实体类属性名与表字段不一致时，可以使用resultMap元素映射其对应关系 -->
+<!-- <resultMap type="com.mybatis.entity.User" id="userMap"> <id property="id" 
+	column="id"/> <result property="userName" column="user_name"/> <result property="password" 
+	column="password"/> </resultMap> <select id="selectById" resultMap="userMap"> 
+	select * from USER where id = #{id} </select> -->
+
+<mapper namespace="com.mybatis.mapper.StudentMapper">
+	<!-- 相当于JDBC中的预编译 -->
+	
+	<!-- 定义student的resultMap -->
+	<resultMap type="student" id="studentScoreMap">
+	<id property="id" column="id"/>
+	<result property="name" column="name"/>
+	<result property="stuNum" column="stuNum"/>
+	<!-- 配置student对象中的Score集合的映射 -->
+	<!-- ofType: 集合中元素的类型-->
+	<collection property="scores" ofType="com.mybatis.entity.Score" select="com.mybatis.mapper.ScoreMapper.findScoreByStid" column="id">
+	</collection>
+	</resultMap>
+	
+	<select id="selectAllStudents" resultMap="studentScoreMap">
+		select * from student 
+	</select>
+	<!-- 查询id的学生信息 -->
+	<select id="selectStudent" resultType="student">
+		select * from student
+		where id=#{id}
+	</select>
+
+</mapper>

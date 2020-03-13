@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		<!-- 使用set方法实现依赖注入 -->
+		<!-- <bean id="student" class="com.lwz.spring.entity.Student">
+		<property name="id" value="14"></property>
+		<property name="name" value="lwz"></property>
+		<property name="age" value="21"></property>
+		<property name="address" value="南宁"></property>
+		</bean> -->
+		
+		
+		<!-- <bean id="stdservice" class="com.lwz.spring.service.impl.StudentServiceImpl"></bean> -->
+		
+		<!-- 配置切面类 -->
+		<!-- <bean id="Logger" class="com.lwz.spring.utils.Logger"></bean> -->
+		
+		<!-- 使用aop:config开始配置AOP的配置 -->
+		<!-- <aop:config>
+		<aop:aspect id="logAdvice" ref="Logger">
+		<aop:pointcut expression="public void com.lwz.spring.service.impl.StudentServiceImpl.saveStudent()" id="before_aop"/>
+		<aop:before method="before" pointcut="execution(public void com.lwz.spring.service.impl.StudentServiceImpl.saveStudent())"/>
+		</aop:aspect>
+		</aop:config> -->
+		
+		<context:component-scan base-package="com.*"></context:component-scan>
+		<aop:aspectj-autoproxy/>
+		
+
+</beans>

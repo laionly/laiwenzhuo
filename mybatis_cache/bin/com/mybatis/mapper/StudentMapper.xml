@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 当实体类属性名与表字段不一致时，可以使用resultMap元素映射其对应关系 -->
+<!-- <resultMap type="com.mybatis.entity.User" id="userMap"> <id property="id" 
+	column="id"/> <result property="userName" column="user_name"/> <result property="password" 
+	column="password"/> </resultMap> <select id="selectById" resultMap="userMap"> 
+	select * from USER where id = #{id} </select> -->
+
+<mapper namespace="com.mybatis.mapper.StudentMapper">
+	<!-- 相当于JDBC中的预编译 -->
+	
+	<!-- 开启mybatis支持二级缓存 -->
+	<cache/>
+	
+	<select id="selectAllStudents" resultType="student">
+		select * from student
+	</select>
+	<!-- 查询id的学生信息 -->
+	<select id="selectStudent" resultType="student" useCache="true">
+		select * from student
+		where id=#{id}
+	</select>
+	<!-- 更新student信息 -->
+	<update id="updateStudent" parameterType="student">
+	update student set 
+	<if test="stuNum != null and !stuNum.equals(' ')">
+	stuNum=#{stuNum},
+	</if> 
+	<if test="name !=null and !name.equals(' ')">
+	name=#{name}
+	</if> 
+	where id=#{id}
+	</update>
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- 扫描带注解的类 -->
+	<context:component-scan base-package="com.*"></context:component-scan>
+	<context:annotation-config></context:annotation-config>
+	<!-- 指定属性文件的位置 -->
+	<context:property-placeholder location="classpath:dbinfo.properties"/>
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	<!-- 配置会话工厂SessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!--扫描带@Entity注解的包  -->
+		<property name="packagesToScan" value="com" />
+		<!-- <property name="mappingLocations" value="classpath:com/ds/digitalshop/entity/*.hbm.xml"></property> -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.useUnicode">${hibernate.useUnicode}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.characterEncoding">${hibernate.characterEncoding}</prop>
+				<!--添加此句报异常：  
+                        在spring的类LocalSessionFactoryBean源码，  
+                        方法buildSessionFactory中将hibernate.current_session_context_class设为org.springframework.orm.hibernate5.SpringSessionContext   
+                        <prop key="hibernate.current_session_context_class">thread</prop>  
+                         -->  
+               <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</prop>  
+
+			</props>
+		
+		
+		</property>
+	
+	
+	</bean>
+	<!-- 使用annotation定义事务 -->
+	 <bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+   
+  <tx:annotation-driven  transaction-manager="transactionManager"/> 
+  
+</beans>

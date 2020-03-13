@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 当实体类属性名与表字段不一致时，可以使用resultMap元素映射其对应关系 -->
+<!-- <resultMap type="com.mybatis.entity.User" id="userMap"> <id property="id" 
+	column="id"/> <result property="userName" column="user_name"/> <result property="password" 
+	column="password"/> </resultMap> <select id="selectById" resultMap="userMap"> 
+	select * from USER where id = #{id} </select> -->
+
+
+
+<mapper namespace="com.mybatis.mapper.ScoreMapper">
+	<!-- 相当于JDBC中的预编译 -->
+
+	<!-- 定义封装Score和Student的resultMap -->
+
+	<resultMap type="Score" id="StudentScoreMap">
+		<id property="sid" column="id" />
+		<result property="stid" column="stid" />
+		<result property="course" column="course" />
+		<result property="score" column="score" />
+		<!-- 一对一的关系映射，配置封装student的内容 
+		select属性指定的内容：查询student的唯一标识：
+		column属性指定的内容：学生根据id查询是，所需要的参数的值
+		-->
+		<association property="student" column="stid" javaType="student" select="com.mybatis.mapper.StudentMapper.selectStudent">
+		</association>
+	</resultMap>
+	<select id="findAll" resultMap="StudentScoreMap">
+		select * from score 
+	</select>
+	<!-- 根据学生id查询成绩列表 -->
+	<select id="findScoreByStid" resultType="score">
+	select * from score where stid=#{stid}
+	</select>
+  
+</mapper>

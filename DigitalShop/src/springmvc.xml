@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	<mvc:default-servlet-handler />
+	<mvc:annotation-driven /> 
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan  base-package="com.naive.controller"/>
+	<context:component-scan  base-package="com.ds.digitalshop.controller"/>
+	<!--配置拦截器-->
+	<!-- <mvc:interceptors>
+		登录拦截器
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+            <bean class="com.naive.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+		<property name="defaultEncoding" value="utf-8"/>
+		<!-- 上传文件大小 -->
+        <property name="maxUploadSize" value="10000000"/> 
+        <!-- <property name="uploadTempDir" value="file:/fileUpload/temp"/>  -->
+	</bean>
+	<!-- SpringMVC四大主要组件
+		1.DispatcherServlet:中央处理器，前端控制器，负责接收所以请求(不包括jsp请求)
+		2.HandlerMapping:映射器，解析请求格式，判断执行哪个方法
+		3.HandlerAdapter:适配器，负责调用具体的方法
+		4.ViewResovler:视图解析器，跳转页面，把结果响应给用户 -->
+	<!-- 配置ViewResolver视图解析器InternalResourceViewResolver父类-->
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		指定前缀和后缀，ModelAndView参数的变化
+		<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean> -->
+	<!-- 配置拦截器 -->
+<!-- 	<mvc:interceptors>
+	</mvc:interceptors> -->
+		<!-- 全局拦截器：拦截所有的URL请求 -->
+		<!-- <bean class="com.xsh.interceptor.FirstInterceptor"></bean>
+		<bean class="com.xsh.interceptor.SecondInterceptor"></bean> -->
+		<!-- <bean class="com.xsh.interceptor.LoginInterceptor"></bean> -->
+		<!-- 拦截特有的URL请求 -->
+		<!-- <mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/**"/>
+			<bean class="com.xsh.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor> -->
+		<!-- 在拦截器链中，各拦截器的执行先后顺序取决于配置文件中配置的节点的先后顺序！ -->
+		<!-- 打开org.springframework.web.servlet.HandlerExecutionChain文件查看源码 -->
+	
+</beans>
