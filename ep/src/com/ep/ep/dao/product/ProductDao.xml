@@ -29,8 +29,8 @@
 	</update>
 
 	<insert id="insertProduct" parameterType="product">
-		insert into product (name,price,rprice,picture)
-		value (#{name},#{price},#{rprice},#{picture})
+		insert into product (name,price,rprice,picture,pt_id)
+		value (#{name},#{price},#{rprice},#{picture},#{pt_id})
 	</insert>
 	
 

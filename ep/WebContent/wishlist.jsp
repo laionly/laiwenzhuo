@@ -570,7 +570,7 @@ function jump(){
                                     <th class="tb-price">折后价</th>
                                     <th class="tb-qty">数量</th>
                                     <th class="tb-add">添加购物车</th>
-                                    <th class="tb-remove">移除收藏</th>
+                                    <th class="tb-remove"></th>
                                 </tr>
                                 </thead>
                                  <c:forEach var="uf" items="${user.focustables}">

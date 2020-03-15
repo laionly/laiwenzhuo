@@ -10,6 +10,7 @@ public class Product implements Serializable{
 	private double rprice;
 	private String picture;
 	private Product_type product_type;
+	private Integer pt_id;
 	private Shop_cart shop_cart;
 	private Orderitem orderitem;
 	private List<Focustable> focustables;
@@ -17,13 +18,15 @@ public class Product implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Product(String name, double price, double rprice, String picture) {
+	public Product(String name, double price, double rprice, String picture,Integer pt_id) {
 		super();
 	
 		this.name = name;
 		this.price = price;
 		this.rprice = rprice;
-		this.picture = picture;	
+		this.picture = picture;
+		this.pt_id = pt_id;
+		
 	}
 	public Integer getPid() {
 		return pid;
@@ -81,12 +84,20 @@ public class Product implements Serializable{
 	public void setFocustables(List<Focustable> focustables) {
 		this.focustables = focustables;
 	}
+	
+	public Integer getPt_id() {
+		return pt_id;
+	}
+	public void setPt_id(Integer pt_id) {
+		this.pt_id = pt_id;
+	}
 	@Override
 	public String toString() {
 		return "Product [pid=" + pid + ", name=" + name + ", price=" + price + ", rprice=" + rprice + ", picture="
-				+ picture + ", product_type=" + product_type + ", shop_cart=" + shop_cart + ", orderitem=" + orderitem
-				+ ", focustables=" + focustables + "]";
+				+ picture + ", product_type=" + product_type + ", pt_id=" + pt_id + ", shop_cart=" + shop_cart
+				+ ", orderitem=" + orderitem + ", focustables=" + focustables + "]";
 	}
+	
 	
 	
 

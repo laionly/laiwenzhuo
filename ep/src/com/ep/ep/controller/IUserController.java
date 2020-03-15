@@ -17,9 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -129,20 +131,22 @@ public class IUserController {
 
 	// 查看用户个人信息通过ID
 	@RequestMapping(value = "findUserByUid", method = RequestMethod.GET)
-	public String findUserByUid(HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView findUserByUid(HttpServletRequest request, HttpServletResponse response,ModelMap model)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
+//		response.setCharacterEncoding("utf-8");
+//		response.setContentType("text/html;charset=utf-8");
 		//通过id查找用户信息
 		User user = us.findUserByUid(Integer.parseInt(request.getParameter("uid")));
 		//设置Session作用域，通过请求转发传进jsp页面
-		request.getSession().setAttribute("user", user);
-		return "/information.jsp";
+//		request.getSession().setAttribute("user", user);
+//		model.addAttribute("user", user);
+//		return "/information.jsp";
+		return new ModelAndView("/information.jsp","user",user);
 	}
 
 	// 更新用户个人信息
 	@RequestMapping(value = "updataUser", method = RequestMethod.POST)
-	public String updataUser(HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView updataUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -152,25 +156,26 @@ public class IUserController {
 				request.getParameter("email"));
 		us.updataUser(user);
 		//设置request作用域，通过请求转发传进jsp页面
-		request.setAttribute("user", user);
-		return "/information.jsp";
+//		request.setAttribute("user", user);
+//		return "/information.jsp";
+		return new ModelAndView("/information.jsp","user",user);
 	}
 
 	// 用户查看收藏夹
 	@RequestMapping(value = "checkIFocustables", method = RequestMethod.GET)
-	public String checkIFocustables(HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView checkIFocustables(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		User user = us.checkFoucstable((Integer) request.getSession().getAttribute("uid"));
-		request.setAttribute("user", user);
+//		request.setAttribute("user", user);
 		//请求转发
-		return "/wishlist.jsp";
+		return new ModelAndView("/wishlist.jsp","user",user);
 	}
 
 	// 用户查看购物车
 	@RequestMapping(value = "checkShopCartByUid", method = RequestMethod.GET)
-	public String checkShopCartByUid(HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView checkShopCartByUid(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -185,10 +190,13 @@ public class IUserController {
 			allAmount += shop_cart.getAmount();
 		}
 		//设置request作用域，通过请求转发传进jsp页面
-		request.setAttribute("allAmount", allAmount);
-		request.setAttribute("shop_carts", shop_carts);
+//		request.setAttribute("allAmount", allAmount);
+//		request.setAttribute("shop_carts", shop_carts);
+		ModelMap model=new ModelMap();
+		model.addAttribute("allAmount",allAmount);
+		model.addAttribute("shop_carts", shop_carts);
 		//请求转发
-		return "/shopping-cart.jsp";
+		return new ModelAndView("/shopping-cart.jsp",model);
 	}
 	//增加商品(有BUG)
 	@RequestMapping(value = "changeShop_CartNumAdd", method = RequestMethod.POST)
