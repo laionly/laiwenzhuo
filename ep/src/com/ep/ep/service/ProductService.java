@@ -1,10 +1,14 @@
 package com.ep.ep.service;
 
+
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ep.ep.entity.Product;
+import java.util.Map;
+
+
 
 public interface ProductService {
 	 public List<Product> findAll();
@@ -15,7 +19,17 @@ public interface ProductService {
 	   
 	   public boolean updateProduct(Product product);
 	   
-	   public boolean UpProduct(Product product, MultipartFile file, String path);
+	   public boolean UpProduct(Product product, MultipartFile mf, String path);
 	   
 	   public void insertProduct(Product product);
+	   
+	   public List<Product> pageProduct(Map<String, Object> params);
+	   
+	   public int productCount();
+
+	   public List<Product> findProductByName(Map<String, Object> params);
+
+	   public  int productCountByName(String name);
+	   
+	 
 }

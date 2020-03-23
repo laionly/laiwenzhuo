@@ -20,7 +20,7 @@ public class UserInterceptor implements HandlerInterceptor{
 		if (request.getSession().getAttribute("uid")!=null) {
 			return true;
 		}else {
-			response.getWriter().println("<script>alert('请登录');window.location='login.jsp'</script>");
+			response.getWriter().println("<script>alert('请登录');window.location='../login.jsp'</script>");
 			return false;
 		}
 	}

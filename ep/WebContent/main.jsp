@@ -33,13 +33,13 @@
       
       <li><a>用户管理</a>
          <ul>
-           <li><a href="" target="center">查看用户</a></li>
+           <li><a href="finduser" target="center">查看用户</a></li>
          </ul>
       </li>
       
       <li><a>订单管理</a>
         <ul>
-           <li><a href="" target="center">查看用户订单</a></li>
+           <li><a href="findorder" target="center">查看用户订单</a></li>
         </ul>
       </li>
       <li><a href="exit">安全退出</a></li>

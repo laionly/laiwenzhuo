@@ -26,7 +26,7 @@
     <td>${products.rprice}</td>
     <td>${products.product_type.typename}</td>
     <td><a href="deleteProduct?pid=${products.pid }">删除</a></td>
-    <td><a href="updateproduct?pid=${products.pid }">修改</a></td>
+    <td><a href="findProductById?pid=${products.pid }">修改</a></td>
    </tr>
    </c:forEach>
  </table>

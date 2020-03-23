@@ -99,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into
 		orderitem(oderbase_id,product_id,shopnum,productname,price,rprice,picture)value(#{oderbase_id},#{product_id},#{shopnum},#{productname},#{price},#{rprice},#{picture})
 	</insert>
-	<!-- 查看订单 -->
+    <!-- 查看订单 -->
 	<select id="checkOrderByUid" resultMap="OrderbaseMap">
 		SELECT * from orderbase o
 		where o.user_id=#{uid} limit #{page},#{size};
@@ -129,6 +129,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findByPhone" resultType="user">
 	select * from user where phone=#{phone}
 	</select>
+	<insert id="addWishList" useGeneratedKeys="true">
+		insert into focustable(pid, uid) value (#{pid},#{uid})
+	</insert>
 
 
 </mapper>

@@ -12,6 +12,7 @@ public class Orderbase {
 	private String phone;
 	private String name;
 	private List<Orderitem> orderitems;
+	private User user;
 	public Orderbase() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -73,17 +74,17 @@ public class Orderbase {
 	public void setOrderitems(List<Orderitem> orderitems) {
 		this.orderitems = orderitems;
 	}
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	@Override
 	public String toString() {
 		return "Orderbase [orid=" + orid + ", user_id=" + user_id + ", amount=" + amount + ", orderdate=" + orderdate
-				+ ", address=" + address + ", phone=" + phone + ", name=" + name + ", orderitems=" + orderitems + "]";
+				+ ", address=" + address + ", phone=" + phone + ", name=" + name + ", orderitems=" + orderitems
+				+ ", user=" + user + "]";
 	}
-	
-
-	
-	
-	
-	
-	
-
 }

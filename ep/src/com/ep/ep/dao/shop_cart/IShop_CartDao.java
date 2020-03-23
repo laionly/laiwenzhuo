@@ -2,6 +2,7 @@ package com.ep.ep.dao.shop_cart;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.ep.ep.entity.Product;
 import com.ep.ep.entity.Shop_cart;
 
 public interface IShop_CartDao {
@@ -12,8 +13,13 @@ public interface IShop_CartDao {
 	//通过购物车项ID删除购物项(用于下单的同时清空购物车)
 	public void deleteShop_CartByCid(Integer cid);
 	//通过商品id查询购物车商品项
-	public Shop_cart findShop_cartByPid(Integer pid);
+	public Shop_cart findShop_cartByPid(@Param("pid") Integer pid,@Param("uid") Integer uid);
 	//从收藏夹添加商品进购物车
 	public void addShop_cart(@Param(value = "uid")Integer uid,@Param(value = "pid")Integer pid,@Param(value = "shoppingnum")Integer shoppingnum);
-
+    //添加购物车
+	public void addShopcart(@Param(value = "uid")Integer uid,@Param(value = "pid")Integer pid,@Param(value = "shoppingnum")Integer shoppingnum);
+	//删除购物车
+	public  void deleteShopcartById(Integer cid);
+	//清空购物车
+	public void deleteShopcart(Integer uid);
 }

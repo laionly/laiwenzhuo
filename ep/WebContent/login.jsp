@@ -62,7 +62,7 @@ function checkuname() {
 	var username=document.getElementById("username").value;
 	/* var usern="username="+usern; */
 	$.ajax({
-	    url:"checkUsername", //请求的url地址
+	    url:"user/checkUsername", //请求的url地址
 	    dataType:"text", //返回格式为text
 	    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
 	    data:{username:username
@@ -81,7 +81,7 @@ function checkuname() {
 function checkemail() {
 	var email=document.getElementById("email").value;
 	$.ajax({
-	    url:"checkEmail", //请求的url地址
+	    url:"user/checkEmail", //请求的url地址
 	    dataType:"text", //返回格式为text
 	    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
 	    data:{email:email
@@ -101,7 +101,7 @@ function checkemail() {
 function  checkphone(){
 	var phone=document.getElementById("phone").value;
 	$.ajax({
-	    url:"checkPhone", //请求的url地址
+	    url:"user/checkPhone", //请求的url地址
 	    dataType:"text", //返回格式为text
 	    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
 	    data:{phone:phone
@@ -181,8 +181,8 @@ function  checkphone(){
             <div class="container">
                 <!-- hotline -->
                 <ul class="nav-top-left">
-                    <c:if test="${!empty(sessionScope.user.username) }"><li><a href="findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
-                 <c:if test="${!empty(sessionScope.user.username) }"><li><a href="userLogout">退出登录</a></li></c:if> 
+                    <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="user/findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
+                 <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="user/userLogout">退出登录</a></li></c:if>
                 </ul><!-- hotline -->
                 <!-- heder links -->
                 <ul class="nav-top-right dagon-nav">
@@ -225,7 +225,7 @@ function  checkphone(){
                             </li>
                         </ul>
                     </li>
-                    <c:if test="${empty(sessionScope.user.username) }"><c:if test="${empty(sessionScope.user.username) }"><li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if></c:if>
+                    <c:if test="${empty(sessionScope.user.uid) }"><c:if test="${empty(sessionScope.user.uid) }"><li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if></c:if>
                 </ul><!-- heder links -->
             </div>
         </div> <!-- header-top -->
@@ -270,11 +270,11 @@ function  checkphone(){
                                     </select>
                                 </div>
                                 <div class="form-search">
-                                    <form>
+                                    <form action="findProductByName" method="post">
                                         <div class="box-group">
-                                            <input type="text" class="form-control"
-                                                   placeholder="Search keyword here...">
-                                            <button class="btn btn-search" type="button"><span class="flaticon-magnifying-glass"></span></button>
+                                            <input type="text" class="form-control" name="name"
+                                                   placeholder="请输入商品名称或关键字">
+                                            <button class="btn btn-search" type="submit"><span class="flaticon-magnifying-glass"></span></button>
                                         </div>
                                     </form>
                                 </div>
@@ -560,14 +560,14 @@ function  checkphone(){
                                     <span class="toggle-submenu hidden-md"></span>                              
                                 </li>
                                 <li class="menu-item-has-children arrow">
-                                    <a href="#" class="dropdown-toggle">商店</a>
+                                    <a href="pageProduct" class="dropdown-toggle">商店</a>
                                     <span class="toggle-submenu hidden-md"></span>
                                     <ul class="submenu parent-megamenu">
                                         <li class="menu-item">
-                                            <a href="grid-product.html">网格商品</a>
+                                            <a href="pageProduct">网格商品</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="list-product.html">商品列表</a>
+                                            <a href="pageProduct">商品列表</a>
                                         </li>                                     
                                         <li class="menu-item">
                                             <a href="detail.html">商店详情</a>
@@ -579,19 +579,19 @@ function  checkphone(){
                                     <span class="toggle-submenu hidden-md"></span>
                                     <ul class="submenu parent-megamenu">
                                         <li class="menu-item">
-                                            <a href="checkOrder?uid=${sessionScope.user.uid }">我的订单</a>
+                                            <a href="user/checkShopCartByUid?uid=${sessionScope.user.uid }">购物车</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="checkShopCartByUid?uid=${sessionScope.user.uid }">购物车</a>
+                                            <a href="user/checkOrder?uid=${sessionScope.user.uid }">我的订单</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="contact-us.html">联系我们</a>
-                                        </li>                                     
-                                        <li class="menu-item">
-                                            <a href="checkIFocustables?uid=${sessionScope.user.uid }">我的收藏</a>
+                                            <a href="user/checkIFocustables?uid=${sessionScope.user.uid }">我的收藏</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="compare.html">比较</a>
+                                            <a href="contact-us.jsp">联系我们</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="compare.jsp">比较</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -654,10 +654,10 @@ function  checkphone(){
  %>
     
      <!-- MAIN -->
-     <c:if test="${!empty(sessionScope.user.username) }">
+     <c:if test="${!empty(sessionScope.user.uid) }">
         <p style="display: block; text-align: center; font-size:30px">您已登录过</p>
      </c:if>
-    <c:if test="${empty(sessionScope.user.username) }"><main class="site-main site-login">
+    <c:if test="${empty(sessionScope.user.uid) }"><main class="site-main site-login">
         
         <div class="container">
             <ol class="breadcrumb-page">
@@ -672,7 +672,7 @@ function  checkphone(){
                     <div class="col-sm-6">
                         <h5 class="title-login">登录你的账号</h5>
                         <p class="p-title-login">欢迎你.</p>
-                        <form action="login" method="post">
+                        <form action="user/login" method="post">
                             <p class="form-row form-row-wide">
                                 <label>用户名:<span class="required"></span></label>
                                 <input type="text" value="<%=username%>" name="username"
@@ -695,7 +695,7 @@ function  checkphone(){
                     <div class="col-sm-6 border-after">
                         <h5 class="title-login">注册账号</h5>
                         <p class="p-title-login">个人信息</p>
-                        <form action="addUser" method="post">
+                        <form action="user/addUser" method="post">
                             <p class="form-row form-row-wide col-md-6 padding-left">
                                 <label>用户名&nbsp;<span class="required" id="showun"></span></label>
                                 <input type="text" value="" name="username" id="username" placeholder="First name" onkeyup ="checkuname()" class="input-text">

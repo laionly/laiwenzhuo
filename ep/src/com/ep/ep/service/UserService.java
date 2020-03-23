@@ -43,13 +43,17 @@ public interface UserService {
 	//计算每项订单商品总数
 	public int productCount(Integer orid);
 	//删除收藏夹里的商品项（取消收藏）
-	public void deleteFocustable(Integer pid);
+	public void deleteFocustable(Integer fid);
 	//通过用户名查找用户
 	public User findUserByUname(String username);
 	//注册时检测邮箱地址是否重复
 	public User findByEmail(String email);
 	//注册时检测手机号是否重复
 	public User findByPhone(String phone);
+	//用户添加商品进收藏夹
+	public void addWishList(Integer uid,Integer pid);
+	//清空收藏夹
+	public void removeAllFocustableByUid(Integer uid);
 	
 	
 

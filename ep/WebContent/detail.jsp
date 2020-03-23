@@ -81,8 +81,8 @@
             <div class="container">
                 <!-- hotline -->
                 <ul class="nav-top-left">
-                    <c:if test="${!empty(sessionScope.user.username) }"><li><a href="findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
-                 <c:if test="${!empty(sessionScope.user.username) }"><li><a href="userLogout">退出登录</a></li></c:if> 
+                    <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
+                 <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="userLogout">退出登录</a></li></c:if>
                 </ul><!-- hotline -->
                 <!-- heder links -->
                 <ul class="nav-top-right dagon-nav">
@@ -125,7 +125,7 @@
                             </li>
                         </ul>
                     </li>
-                    <c:if test="${empty(sessionScope.user.username) }"><li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if>
+                    <c:if test="${empty(sessionScope.user.uid) }"><li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if>
                 </ul><!-- heder links -->
             </div>
         </div> <!-- header-top -->

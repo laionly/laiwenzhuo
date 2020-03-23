@@ -1,22 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set value="${pageContext.request.contextPath}" var="ctx"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>Dagon</title>
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="assets/fonts/flaticon/flaticon.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/pe-icon-7-stroke.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/chosen.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/jquery.bxslider.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="${ctx}/assets/images/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/fonts/flaticon/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/chosen.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/jquery.bxslider.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
           rel="stylesheet">
 </head>
@@ -82,8 +83,8 @@
             <div class="container">
                 <!-- hotline -->
                 <ul class="nav-top-left">
-                 <c:if test="${!empty(sessionScope.user.username) }"><li><a href="findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
-                 <c:if test="${!empty(sessionScope.user.username) }"><li><a href="userLogout">退出登录</a></li></c:if>
+                 <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="user/findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
+                 <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="user/userLogout">退出登录</a></li></c:if>
                 </ul><!-- hotline -->
                 <!-- heder links -->
                 <ul class="nav-top-right dagon-nav">
@@ -124,7 +125,7 @@
                             </li>
                         </ul>
                     </li>
-                   <c:if test="${empty(sessionScope.user.username) }"> <li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if>
+                   <c:if test="${empty(sessionScope.user.uid) }"> <li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if>
                 </ul><!-- heder links -->
             </div>
         </div> <!-- header-top -->
@@ -170,11 +171,11 @@
                                     </select>
                                 </div>
                                 <div class="form-search">
-                                    <form>
+                                    <form action="findProductByName" method="post">
                                         <div class="box-group">
-                                            <input type="text" class="form-control"
-                                                   placeholder="Search keyword here...">
-                                            <button class="btn btn-search" type="button"><span
+                                            <input type="text" class="form-control" name="name"
+                                                   placeholder="请输入商品名称或关键字">
+                                            <button class="btn btn-search" type="submit"><span
                                                     class="flaticon-magnifying-glass"></span></button>
                                         </div>
                                     </form>
@@ -289,20 +290,20 @@
                             <ul class="header-nav dagon-nav">
                                 <li class="btn-close hidden-md"><i class="flaticon-close" aria-hidden="true"></i></li>
                                 <li class="menu-item-has-children arrow">
-                                    <a href="index.jsp">首页</a>                                
+                                    <a href="${ctx}/index.jsp">首页</a>
                                 </li>
                                 <li class="menu-item-has-children arrow">
-                                    <a href="grid-product.html">商店</a>
+                                    <a href="pageProduct">商店</a>
                                     <span class="toggle-submenu hidden-md"></span>
                                     <ul class="submenu parent-megamenu">
                                         <li class="menu-item">
-                                            <a href="grid-product.html">网格商品</a>
+                                            <a href="pageProduct">网格商品</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="list-product.html">商品列表</a>
+                                            <a href="pageProduct">商品列表</a>
                                         </li>                                  
                                         <li class="menu-item">
-                                            <a href="detail.html">商品详情</a>
+                                            <a href="pageProduct">商品详情</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -415,13 +416,13 @@
                                     <span class="toggle-submenu hidden-md"></span>
                                     <ul class="submenu parent-megamenu">
                                         <li class="menu-item">
-                                            <a href="checkOrder?uid=${sessionScope.user.uid }">我的订单</a>
+                                            <a href="user/checkShopCartByUid?uid=${sessionScope.user.uid }">购物车</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="checkShopCartByUid?uid=${sessionScope.user.uid }">购物车</a>
+                                            <a href="user/checkOrder?uid=${sessionScope.user.uid }">我的订单</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="checkIFocustables?uid=${sessionScope.user.uid }">我的收藏</a>
+                                            <a href="user/checkIFocustables?uid=${sessionScope.user.uid }">我的收藏</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="compare.html">比较</a>

@@ -80,8 +80,8 @@
             <div class="container">
                 <!-- hotline -->
                 <ul class="nav-top-left">
-                    <c:if test="${!empty(sessionScope.user.username) }"><li><a href="findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
-                 <c:if test="${!empty(sessionScope.user.username) }"><li><a href="userLogout">退出登录</a></li></c:if> 
+                    <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="user/findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
+                 <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="user/userLogout">退出登录</a></li></c:if>
                 </ul><!-- hotline -->
                 <!-- heder links -->
                 <ul class="nav-top-right dagon-nav">
@@ -124,7 +124,7 @@
                             </li>
                         </ul>
                     </li>
-                    <c:if test="${empty(sessionScope.user.username) }"><li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if>
+                    <c:if test="${empty(sessionScope.user.uid) }"><li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if>
                 </ul><!-- heder links -->
             </div>
         </div> <!-- header-top -->
@@ -169,11 +169,11 @@
                                     </select>
                                 </div>
                                 <div class="form-search">
-                                    <form>
+                                    <form action="findProductByName" method="post">
                                         <div class="box-group">
-                                            <input type="text" class="form-control"
-                                                   placeholder="Search keyword here...">
-                                            <button class="btn btn-search" type="button"><span
+                                            <input type="text" class="form-control" name="name"
+                                                   placeholder="请输入商品名称或关键字">
+                                            <button class="btn btn-search" type="submit"><span
                                                     class="flaticon-magnifying-glass"></span></button>
                                         </div>
                                     </form>
@@ -463,14 +463,14 @@
                                     <span class="toggle-submenu hidden-md"></span>                               
                                 </li>
                                 <li class="menu-item-has-children arrow">
-                                    <a href="#" class="dropdown-toggle">商店</a>
+                                    <a href="pageProduct" class="dropdown-toggle">商店</a>
                                     <span class="toggle-submenu hidden-md"></span>
                                     <ul class="submenu parent-megamenu">
                                         <li class="menu-item">
-                                            <a href="grid-product.html">网格商品</a>
+                                            <a href="pageProduct">网格商品</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="list-product.html">商品列表</a>
+                                            <a href="pageProduct">商品列表</a>
                                         </li>                                      
                                         <li class="menu-item">
                                             <a href="detail.html">商品详情</a>
@@ -482,19 +482,19 @@
                                     <span class="toggle-submenu hidden-md"></span>
                                     <ul class="submenu parent-megamenu">
                                         <li class="menu-item">
-                                            <a href="checkOrder?uid=${sessionScope.user.uid }">我的订单</a>
+                                            <a href="user/checkShopCartByUid?uid=${sessionScope.user.uid }">购物车</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="checkShopCartByUid?uid=${sessionScope.user.uid }">购物车</a>
+                                            <a href="user/checkOrder?uid=${sessionScope.user.uid }">我的订单</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="user/checkIFocustables?uid=${sessionScope.user.uid }">我的收藏</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="contact-us.html">联系我们</a>
-                                        </li>                                   
-                                        <li class="menu-item">
-                                            <a href="checkIFocustables?uid=${sessionScope.user.uid }">我的收藏</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="compare.html">比较</a>
+                                            <a href="#">比较</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -590,23 +590,26 @@
                             </div>
                         </div>
                         <div class="products products-list products-grid equal-container auto-clear">
+                           <c:forEach items="${page.list}" var="p">
                             <div class="product-item style1 width-33 col-md-4 col-sm-6 col-xs-6 equal-elem">
+                                
                                 <div class="product-inner">
                                     <div class="product-thumb">
+                                  
                                         <div class="thumb-inner">
-                                            <a href="#"><img src="assets/images/product/p8.jpg" alt="p8"></a>
+                                            <a href="#"><img src="/ep/upload/${p.picture}" alt="p8"></a>
                                         </div>
                                         <span class="onsale">-50%</span>
                                         <a href="#" class="quick-view">Quick View</a>
                                     </div>
                                     <div class="product-innfo">
-                                        <div class="product-name"><a href="#">Photo Camera
+                                        <div class="product-name"><a href="#">${p.name}
                                         </a></div>
                                         <span class="price">
 
-                                                <ins>$229.00</ins>
+                                                <ins>${p.rprice}</ins>
 
-                                                <del>$259.00</del>
+                                                <del>${p.price}</del>
 
                                             </span>
                                         <span class="star-rating">
@@ -630,15 +633,17 @@
                                             <p>Guarantee: 2 Year</p>
                                         </div>
                                         <div class="single-add-to-cart">
-                                            <a href="#" class="btn-add-to-cart">Add to cart</a>
-                                            <a href="compare.html" class="compare"><i class="fa fa-exchange"></i>Compare</a>
-                                            <a href="wishlist.jsp" class="wishlist"><i class="fa fa-heart-o"
+                                            <a href="user/addShopCart?pid=${p.pid}" class="btn-add-to-cart">Add to cart</a>
+                                            <a href="#" class="compare"><i class="fa fa-exchange"></i>Compare</a>
+                                            <a href="user/addWishList?pid=${p.pid}" class="wishlist"><i class="fa fa-heart-o"
                                                                             aria-hidden="true"></i>Wishlist</a>
                                         </div>
                                     </div>
                                 </div>
+                              
                             </div>
-                            <div class="product-item style1 width-33 col-md-4 col-sm-6 col-xs-6 equal-elem">
+                              </c:forEach>
+                           <!--  <div class="product-item style1 width-33 col-md-4 col-sm-6 col-xs-6 equal-elem">
                                 <div class="product-inner">
                                     <div class="product-thumb">
                                         <div class="thumb-inner">
@@ -1157,17 +1162,18 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="pagination">
-                            <ul class="nav-links">
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li class="back-next"><a href="#">Next</a></li>
-                            </ul>
-                            <span class="show-resuilt">Showing 1-8 of 12 result</span>
-                        </div>
+             <div class="pages" style="margin-left:10px;">
+				<button class="layui-btn layui-btn-xs" style="float: left;margin-left:5px;" onclick="window.location.href='pageProduct?pagenum=${page.prepagenum}'">上一页</button>
+				<form class="layui-form" style="float: left" action="pageProduct" method="get">
+					<font style="margin-left:5px;">当前页数</font>
+					<input style="margin-left:5px;width:50px;" type="text" name="nowpage" value="${page.pagenum}"/>
+					<font style="margin-left:5px;">总页数${page.totalpagenum}</font>
+					<input class="layui-btn layui-btn-xs" type="submit" value="跳转"/>
+				</form>
+				<button style="margin-left:5px;" class="layui-btn layui-btn-xs" onclick="window.location.href='pageProduct?pagenum=${page.nextpagenum}'">下一页</button>
+			</div>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-4">

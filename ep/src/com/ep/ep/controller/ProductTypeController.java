@@ -23,7 +23,7 @@ public class ProductTypeController {
     //跳转到添加类型界面
     @RequestMapping(value="addtotype")
     public String addtotype(){
-    	return "/addtype.jsp";
+    	return "addtype";
     }
     
     //添加类型
@@ -47,7 +47,7 @@ public class ProductTypeController {
 		response.setContentType("text/html;charset=utf-8");
 		List<Product_type> producttype= pService.findAllProducttype();
 		request.setAttribute("producttype", producttype);
-    	return "/deletetype.jsp";	
+    	return "deletetype";	
     }
     
     //删除类型界面

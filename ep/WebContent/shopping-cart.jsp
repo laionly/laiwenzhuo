@@ -1,78 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set value="${pageContext.request.contextPath}" var="ctx"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>Dagon</title>
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="assets/fonts/flaticon/flaticon.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/pe-icon-7-stroke.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/chosen.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/jquery.bxslider.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="${ctx}/assets/images/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/fonts/flaticon/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/chosen.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/jquery.bxslider.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
+          rel="stylesheet">
 </head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-function changenumadd(){
-	var allAmount=document.getElementById("allAmount").innerText;
-	var shoppingnum=document.getElementById("shoppingnum").value;
-	var amount=document.getElementById("amount").innerText;
-	var cid=document.getElementById("cid").innerText ;
-	var obj = JSON.stringify({"allAmount":allAmount,"shoppingnum":shoppingnum,"amount":amount,"cid":cid});
-	$.ajax({
-		url:"changeShop_CartNumAdd", //请求的url地址
-	    dataType:"json", //返回格式为json
-	    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
-	    data:obj, //参数值
-	    type:"POST", //请求方式
-	    contentType: 'application/json;charset=utf-8',
-	    success:function(data){
-	    	 var AllAmount=document.getElementById("allAmount");
-	    	AllAmount.innerText=data.allAmount;
-	    	 var AllAmount1=document.getElementById("allAmount1");
-		    	AllAmount1.innerText=data.allAmount;
-	    	var Shoppingnum=document.getElementById("shoppingnum");
-	    	Shoppingnum.innerHTML=data.shoppingnum;
-	    	var Amount =document.getElementById("amount");
-	    	Amount.innerHTML=data.amount; 
-	    }
-	})
-}
 
-function changenumdel(){
-	var allAmount=document.getElementById("allAmount").innerText;
-	var shoppingnum=document.getElementById("shoppingnum").value;
-	var amount=document.getElementById("amount").innerText;
-	var cid=document.getElementById("cid").innerText ;
-	var obj = JSON.stringify({"allAmount":allAmount,"shoppingnum":shoppingnum,"amount":amount,"cid":cid});
-	$.ajax({
-		url:"changeShop_CartNumDel", //请求的url地址
-	    dataType:"json", //返回格式为json
-	    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
-	    data:obj, //参数值
-	    type:"POST", //请求方式
-	    contentType: 'application/json;charset=utf-8',
-	    success:function(data){
-	    	var AllAmount=document.getElementById("allAmount");
-	    	AllAmount.innerText=data.allAmount;
-	    	var AllAmount1=document.getElementById("allAmount1");
-		    AllAmount1.innerText=data.allAmount;
-	    	var Shoppingnum=document.getElementById("shoppingnum");
-	    	Shoppingnum.innerHTML=data.shoppingnum;
-	    	var Amount =document.getElementById("amount");
-	    	Amount.innerHTML=data.amount; 
-	    	
-	    }
-	})
-}
+$(function () {
+    $("#plus").click(function () {
+        var allAmount=document.getElementById("allAmount").innerText;
+        var shoppingnum=document.getElementById("shoppingnum").value;
+        var amount=document.getElementById("amount").innerText;
+        var cid=document.getElementById("cid").innerText ;
+        var obj = JSON.stringify({"allAmount":allAmount,"shoppingnum":shoppingnum,"amount":amount,"cid":cid});
+        $.ajax({
+            url:"changeShop_CartNumAdd", //请求的url地址
+            dataType:"json", //返回格式为json
+            async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+            data:obj, //参数值
+            type:"POST", //请求方式
+            contentType: 'application/json;charset=utf-8',
+            success:function(data){
+                var AllAmount=document.getElementById("allAmount");
+                AllAmount.innerText=data.allAmount;
+                var AllAmount1=document.getElementById("allAmount1");
+                AllAmount1.innerText=data.allAmount;
+                $('#shoppingnum').val(data.shoppingnum);
+                var Amount =document.getElementById("amount");
+                Amount.innerHTML=data.amount;
+
+            }
+        });
+    });
+});
+
+$(function () {
+    $("#minus").click(function () {
+        var allAmount=document.getElementById("allAmount").innerText;
+        var shoppingnum=document.getElementById("shoppingnum").value;
+        var amount=document.getElementById("amount").innerText;
+        var cid=document.getElementById("cid").innerText ;
+        var obj = JSON.stringify({"allAmount":allAmount,"shoppingnum":shoppingnum,"amount":amount,"cid":cid});
+        $.ajax({
+            url:"changeShop_CartNumDel", //请求的url地址
+            dataType:"json", //返回格式为json
+            async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+            data:obj, //参数值
+            type:"POST", //请求方式
+            contentType: 'application/json;charset=utf-8',
+            success:function(data){
+                var AllAmount=document.getElementById("allAmount");
+                AllAmount.innerText=data.allAmount;
+                var AllAmount1=document.getElementById("allAmount1");
+                AllAmount1.innerText=data.allAmount;
+                $('#shoppingnum').val(data.shoppingnum);
+                var Amount =document.getElementById("amount");
+                Amount.innerHTML=data.amount;
+
+            }
+        });
+    });
+})
 
 function jump(){
 	 window.location.href="allAmount";
@@ -141,31 +147,31 @@ function jump(){
             <div class="container">
                 <!-- hotline -->
                 <ul class="nav-top-left">
-                    <c:if test="${!empty(sessionScope.user.username) }"><li><a href="findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
-                 <c:if test="${!empty(sessionScope.user.username) }"><li><a href="userLogout">退出登录</a></li></c:if> 
+                    <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="findUserByUid?uid=${sessionScope.user.uid }">欢迎你${sessionScope.user.username }</a></li></c:if>
+                 <c:if test="${!empty(sessionScope.user.uid) }"><li><a href="userLogout">退出登录</a></li></c:if>
                 </ul><!-- hotline -->
                 <!-- heder links -->
                 <ul class="nav-top-right dagon-nav">
                     <li class="menu-item-has-children">
                         <a href="#" class="dropdown-toggle">
-                            <img src="assets/images/general/l1.jpg" alt="flag">English<i class="fa fa-angle-down"
+                            <img src="${ctx}/assets/images/general/l1.jpg" alt="flag">English<i class="fa fa-angle-down"
                                                                                          aria-hidden="true"></i>
                         </a>
                         <ul class="submenu parent-megamenu">
                             <li class="switcher-option">
-                                <a href="#" class="flag"><img src="assets/images/general/l1.jpg" alt="flag">English</a>
+                                <a href="#" class="flag"><img src="${ctx}/assets/images/general/l1.jpg" alt="flag">English</a>
                             </li>
                             <li class="switcher-option">
-                                <a href="#" class="flag"><img src="assets/images/general/l2.jpg" alt="flag">Hungary</a>
+                                <a href="#" class="flag"><img src="${ctx}/assets/images/general/l2.jpg" alt="flag">Hungary</a>
                             </li>
                             <li class="switcher-option">
-                                <a href="#" class="flag"><img src="assets/images/general/l3.jpg" alt="flag">German</a>
+                                <a href="#" class="flag"><img src="${ctx}/assets/images/general/l3.jpg" alt="flag">German</a>
                             </li>
                             <li class="switcher-option">
-                                <a href="#" class="flag"><img src="assets/images/general/l4.jpg" alt="flag">French</a>
+                                <a href="#" class="flag"><img src="${ctx}/assets/images/general/l4.jpg" alt="flag">French</a>
                             </li>
                             <li class="switcher-option">
-                                <a href="#" class="flag"><img src="assets/images/general/l5.jpg" alt="flag">Canada</a>
+                                <a href="#" class="flag"><img src="${ctx}/assets/images/general/l5.jpg" alt="flag">Canada</a>
                             </li>
                         </ul>
                     </li>
@@ -185,7 +191,7 @@ function jump(){
                             </li>
                         </ul>
                     </li>
-                    <c:if test="${empty(sessionScope.user.username) }"><li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if>
+                    <c:if test="${empty(sessionScope.user.uid) }"><li><a href="login.jsp"><i class="flaticon-profile" aria-hidden="true"></i>注册 / 登录</a></li></c:if>
                 </ul><!-- heder links -->
             </div>
         </div> <!-- header-top -->
@@ -196,7 +202,7 @@ function jump(){
                     <div class="col-md-2 nav-left">
                         <!-- logo -->
                         <strong class="logo">
-                            <a href="index.jsp"><img src="assets/images/logo.png" alt="logo"></a>
+                            <a href="${ctx}/index.jsp"><img src="${ctx}/assets/images/logo.png" alt="logo"></a>
                         </strong><!-- logo -->
                     </div>
                     <div class="col-md-8 nav-mind">
@@ -230,11 +236,12 @@ function jump(){
                                     </select>
                                 </div>
                                 <div class="form-search">
-                                    <form>
+                                    <form action="../findProductByName" method="post">
                                         <div class="box-group">
-                                            <input type="text" class="form-control"
-                                                   placeholder="Search keyword here...">
-                                            <button class="btn btn-search" type="button"><span class="flaticon-magnifying-glass"></span></button>
+                                            <input type="text" class="form-control" name="name"
+                                                   placeholder="请输入商品名称或关键字">
+                                            <button class="btn btn-search" type="submit"><span
+                                                    class="flaticon-magnifying-glass"></span></button>
                                         </div>
                                     </form>
                                 </div>
@@ -273,7 +280,7 @@ function jump(){
                                                 <li class="product-inner">
                                                     <div class="product-thumb style1">
                                                         <div class="thumb-inner">
-                                                            <a href="#"><img src="assets/images/home1/c1.jpg"
+                                                            <a href="#"><img src="${ctx}/assets/images/home1/c1.jpg"
                                                                             alt="c1"></a>
                                                         </div>
                                                     </div>
@@ -516,18 +523,18 @@ function jump(){
                             <ul class="header-nav dagon-nav">
                                 <li class="btn-close hidden-md"><i class="flaticon-close" aria-hidden="true"></i></li>
                                 <li class="menu-item-has-children arrow">
-                                    <a href="index.jsp" class="dropdown-toggle">首页</a>
+                                    <a href="${ctx}/index.jsp" class="dropdown-toggle">首页</a>
                                     <span class="toggle-submenu hidden-md"></span>                           
                                 </li>
                                 <li class="menu-item-has-children arrow">
-                                    <a href="#" class="dropdown-toggle">商店</a>
+                                    <a href="../pageProduct" class="dropdown-toggle">商店</a>
                                     <span class="toggle-submenu hidden-md"></span>
                                     <ul class="submenu parent-megamenu">
                                         <li class="menu-item">
-                                            <a href="grid-product.html">网格商品</a>
+                                            <a href="../pageProduct">网格商品</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="list-product.html">商品列表</a>
+                                            <a href="../pageProduct">商品列表</a>
                                         </li>                                   
                                         <li class="menu-item">
                                             <a href="detail.html">商品详情</a>
@@ -539,16 +546,16 @@ function jump(){
                                     <span class="toggle-submenu hidden-md"></span>
                                     <ul class="submenu parent-megamenu">
                                         <li class="menu-item">
-                                            <a href="checkOrder?uid=${sessionScope.user.uid }">我的订单</a>
-                                        </li>
-                                        <li class="menu-item">
                                             <a href="checkShopCartByUid?uid=${sessionScope.user.uid }">购物车</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a href="contact-us.html">联系我们</a>
-                                        </li>                                   
+                                            <a href="checkOrder?uid=${sessionScope.user.uid }">我的订单</a>
+                                        </li>
                                         <li class="menu-item">
                                             <a href="checkIFocustables?uid=${sessionScope.user.uid }">我的收藏</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="contact-us.html">联系我们</a>
                                         </li>
                                         <li class="menu-item">
                                             <a href="compare.html">比较</a>
@@ -600,7 +607,7 @@ function jump(){
     <main class="site-main shopping-cart">
         <div class="container">
             <ol class="breadcrumb-page">
-                <li><a href="index.jsp">首页 </a></li>
+                <li><a href="${ctx}/index.jsp">首页 </a></li>
                 <li class="active"><a href="#">购物车</a></li>
             </ol>
         </div>
@@ -612,7 +619,7 @@ function jump(){
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th class="tb-total">收藏ID</th>
+                                    <th class="tb-total"></th>
                                     <th class="tb-image">商品图片</th>
                                     <th class="tb-product">商品名称</th>
                                     <th class="tb-price">单价</th>
@@ -628,21 +635,21 @@ function jump(){
                                 <tr>
                                     <td id="cid" >${sc.cid}</td>
                                     <td class="tb-image"><a href="#" class="item-photo"><img
-                                            src="upload/${sc.products.picture }"
+                                            src="${ctx}/upload/${sc.products.picture }"
                                             alt="cart"  style="width:150px;height:150px;display:inline-block; "></a></td>
                                     <td class="tb-product">
                                         <div class="product-name"><a href="#">${sc.products .name }</a></div>
                                     </td>
                                     <td class="tb-price">
-                                        <span class="price">${sc.products .price}</span>
+                                        <span class="price">${sc.products .rprice}</span>
                                     </td>
                                     <td class="tb-qty">
                                         <div class="quantity">
                                             <div class="buttons-added">
                                                 <input type="text" id="shoppingnum" value="${sc.shoppingnum}"  title="Qty" class="input-text qty text"
                                                        size="1">
-                                                <a href="#" onClick="changenumadd()" class="sign plus"><i class="fa fa-plus"></i></a>
-                                                <a href="#" onClick="changenumdel()" class="sign minus"><i class="fa fa-minus"></i></a>
+                                                <a href="#"  id="plus" class="sign plus"><i class="fa fa-plus"></i></a>
+                                                <a href="#"  id="minus" class="sign minus"><i class="fa fa-minus"></i></a>
                                             </div>
                                         </div>
                                     </td>
@@ -650,7 +657,7 @@ function jump(){
                                         <span class="price" id="amount" >${sc.amount}</span>
                                     </td>
                                     <td class="tb-remove">
-                                        <a href="#" class="action-remove"><span><i class="flaticon-close"
+                                        <a href="deleteShopcartById?cid=${sc.cid }" class="action-remove"><span><i class="flaticon-close"
                                                                                   aria-hidden="true"></i></span></a>
                                     </td>
                                 </tr>
@@ -663,18 +670,27 @@ function jump(){
                         </div>
                         <c:if test="${empty(shop_carts) }">
                         <p align="center">您的购物车空空如也</p>
-                        <div class="cart-actions">
-                            <button type="button" onclick="changenum()" class="btn-continue">
-                                <span >继续购物</span>
-                            </button>
-                            <button type="button" class="btn-clean">
-                                <span>更新购物车</span>
-                            </button>
-                            <button type="button" class="btn-update">
-                                <span>清除购物车</span>
-                            </button>
-                        </div>
                         </c:if>
+                        <div class="cart-actions">
+                            <a href="../pageProduct">
+                            <button type="button" class="btn-continue" >
+                              <span >继续购物</span>
+                            </button>
+                            </a>
+                            
+                            <a href="checkShopCartByUid">
+                            <button type="button" class="btn-clean">
+                               <span>更新购物车</span>
+                            </button>
+                            </a>
+                            
+                             <a href="deleteShopcart?uid=${sessionScope.user.uid }">
+                             <button type="button" class="btn-update" >
+                              <span>清除购物车</span>
+                            </button>
+                            </a>
+                        </div>
+
                     </form>
                 </div>
                 <div class="col-md-3">
@@ -999,7 +1015,7 @@ function jump(){
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 equal-elem">
-                        <div class="logo-footer"><img src="assets/images/logo-light.png" alt="logo"></div>
+                        <div class="logo-footer"><img src="${ctx}/assets/images/logo-light.png" alt="logo"></div>
                         <div class="contacts">
                             <p class="contacts-info">Nullam tristique tortor nibh, in viverra libero sollicitudin ac.
                                 Suspendisse quis lacinia ipsum. Etiam scelerisque sit amet lectus quis lacinia. Sed.</p>
@@ -1068,10 +1084,10 @@ function jump(){
                     Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
                 </div>
                 <div class="pay-men">
-                    <a href="#"><img src="assets/images/general/pay1.jpg" alt="pay1"></a>
-                    <a href="#"><img src="assets/images/general/pay2.jpg" alt="pay2"></a>
-                    <a href="#"><img src="assets/images/general/pay3.jpg" alt="pay3"></a>
-                    <a href="#"><img src="assets/images/general/pay4.jpg" alt="pay4"></a>
+                    <a href="#"><img src="${ctx}/assets/images/general/pay1.jpg" alt="pay1"></a>
+                    <a href="#"><img src="${ctx}/assets/images/general/pay2.jpg" alt="pay2"></a>
+                    <a href="#"><img src="${ctx}/assets/images/general/pay3.jpg" alt="pay3"></a>
+                    <a href="#"><img src="${ctx}/assets/images/general/pay4.jpg" alt="pay4"></a>
                 </div>
             </div>
         </div>

@@ -21,8 +21,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT p.*,f.* from
 		focustable f,product p where f.uid=#{uid} and f.pid=p.pid
 	</select>
-	<delete id="deleteFocustableByPid">
-	delete from focustable f where f.pid=#{pid}
+	<delete id="deleteFocustableByFid">
+	delete from focustable f where f.fid=#{fid}
+	</delete>
+
+	<delete id="removeAllFocustableByUid" parameterType="integer">
+		delete from focustable f where f.uid=#{uid}
 	</delete>
 
 </mapper>

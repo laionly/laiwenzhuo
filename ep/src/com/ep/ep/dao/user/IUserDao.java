@@ -10,7 +10,7 @@ import com.ep.ep.entity.Orderbase;
 import com.ep.ep.entity.Orderitem;
 import com.ep.ep.entity.Shop_cart;
 import com.ep.ep.entity.User;
-@Component
+
 public interface IUserDao {
 	//用户注册
 	public void addUser(User user);
@@ -42,6 +42,8 @@ public interface IUserDao {
 	public List<Orderitem> checkOrderItemByOrdi(Map<String, Object> params);
 	//查看商品数量
 	public int productCount(Integer orid);
+	//添加商品进收藏夹
+	public void addWishList(@Param("uid") Integer uid,@Param("pid") Integer pid);
 	
 	
 

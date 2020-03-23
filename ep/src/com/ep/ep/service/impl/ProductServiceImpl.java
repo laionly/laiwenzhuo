@@ -1,5 +1,7 @@
 package com.ep.ep.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,9 @@ import com.ep.ep.dao.product.ProductDao;
 import com.ep.ep.entity.Product;
 import com.ep.ep.service.ProductService;
 import com.ep.ep.util.FileAccepterUtil;
+import java.util.Map;
+
+
 
 @Service
 @Transactional
@@ -59,19 +64,45 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public boolean UpProduct(Product product, MultipartFile file, String path) {
+	public boolean UpProduct(Product product, MultipartFile mf, String path)  {
 		FileAccepterUtil accepterUtil = new FileAccepterUtil();
-		if (file.getOriginalFilename()==null||file.getOriginalFilename()=="") {
+		if (mf.getOriginalFilename()==null||mf.getOriginalFilename()=="") {
 			return updateProduct(product);
 		}else {
-			String fileName = accepterUtil.FileUpload(file, path);
+			String fileName = accepterUtil.FileUpload(mf, path);
 			if (fileName!=null && accepterUtil.FileDelete(path, product.getPicture())) {
-				product.setPicture(fileName);
+				product.setPicture(fileName);;
 				return updateProduct(product);
 			}else {
 				return false;
 			}
 		}
+		
 	}
+
+	@Override
+	public List<Product> pageProduct(Map<String, Object> params) {
+		List<Product> products=productDao.pageProduct(params);
+		return products;
+	}
+
+	@Override
+	public int productCount() {
+		int productCount=productDao.productCount();
+		return productCount;
+	}
+
+	@Override
+	public List<Product> findProductByName(Map<String, Object> params) {
+		List<Product> products=productDao.findProductByName(params);
+		return products;
+	}
+
+	@Override
+	public int productCountByName(String name) {
+		int count=productDao.productCountByName(name);
+		return count;
+	}
+
 
 }

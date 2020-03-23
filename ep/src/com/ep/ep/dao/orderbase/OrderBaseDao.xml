@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC " -//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ep.ep.dao.orderbase.OrderBaseDao">
+<!--一对多查询订单基础以及订单详情  -->
+ <select id="findOrderBaseById" parameterType="Integer" resultMap="orderbaseanditem">
+     select ob.*,oi.*
+		from orderbase ob,orderitem oi
+		where ob.orid =oi.oderbase_id
+		and ob.orid=#{orid}
+ </select>
+   <resultMap type="com.ep.ep.entity.Orderbase" id="orderbaseanditem">
+   <id property="orid" column="orid"/>
+   <result property="amount" column="amount"/>
+    <result property="orderdate" column="orderdate"/>
+    <result property="address" column="address"/>
+    <result property="phone" column="phone"/>
+    <result property="name" column="name"/>
+    
+   <collection property="orderitems" ofType="com.ep.ep.entity.Orderitem">
+    <id property="oid" column="oid"/>
+    <result property="shopnum" column="shopnum"/>
+    <result property="productname" column="productname"/>
+    <result property="price" column="price"/>
+    <result property="rprice" column="rprice"/>
+    <result property="picture" column="picture"/>
+   </collection>                                                  
+ </resultMap>
+ 
+ <!--多对一查询订单基础以及用户  -->
+ <select id="findOrderbase"  parameterType="user" resultMap="orderanduser">
+   select ob.*,u.*
+   from orderbase ob,user u
+   where ob.user_id=u.uid
+ 
+ </select>
+ 
+ <resultMap type="com.ep.ep.entity.Orderbase" id="orderanduser">
+  <id property="orid" column="orid"/>
+   <result property="amount" column="amount"/>
+    <result property="orderdate" column="orderdate"/>
+    <result property="address" column="address"/>
+    <result property="phone" column="phone"/>
+    <result property="name" column="name"/>
+    <association property="user" javaType="com.ep.ep.entity.User">
+       <id property="uid" column="uid"/>
+       <result property="username" column="username"/>
+       <result property="password" column="password"/>
+       <result property="address" column="address"/>
+       <result property="phone" column="phone"/>
+       <result property="email" column="email"/>
+    </association>
+ </resultMap>
+ 
+</mapper>

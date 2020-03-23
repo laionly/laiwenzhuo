@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService{
 			double allAmount = 0;
 			//遍历List集合，计算一项购物项的总价=商品单价*数量并且返回总价
 			for (Shop_cart shop_cart : shop_carts) {
-				double amount = shop_cart.getProducts().getPrice() * shop_cart.getShoppingnum();
+				double amount = shop_cart.getProducts().getRprice() * shop_cart.getShoppingnum();
 				shop_cart.setAmount(amount);
 				allAmount += shop_cart.getAmount();
 			}
@@ -163,8 +163,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	//删除收藏夹里的商品项（取消收藏）
-	public void deleteFocustable(Integer pid) {
-		fd.deleteFocustableByPid(pid);
+	public void deleteFocustable(Integer fid) {
+		fd.deleteFocustableByFid(fid);
 		
 	}
 
@@ -189,10 +189,15 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
-	
+    @Override
+    public void addWishList(Integer uid, Integer pid) {
+        ud.addWishList(uid,pid);
+    }
+
+    @Override
+    public void removeAllFocustableByUid(Integer uid) {
+        fd.removeAllFocustableByUid(uid);
+    }
 
 
-	
-
-	
 }

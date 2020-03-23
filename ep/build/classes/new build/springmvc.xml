@@ -9,37 +9,30 @@
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
 	<!-- 自动扫描且只扫描@Controller -->
-	<context:component-scan
-		base-package="com.ep.ep.controller" />
+	<context:component-scan base-package="com.ep.ep.controller" />
+	<!-- 视图解析器 -->
+	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="/"/>
+	<property name="suffix" value=".jsp"/>
+	</bean>
+	
 	<!--配置拦截器 -->
 	<mvc:interceptors>
 		<!-- 登录拦截器 -->
 		<mvc:interceptor>
-			<!-- 拦截以下请求 -->
-			<mvc:mapping path="/findUserByUid" />
-			<mvc:mapping path="/updataUser" />
-			<mvc:mapping path="/checkIFocustables" />
-			<mvc:mapping path="/checkShopCartByUid" />
-			<mvc:mapping path="/changeShop_CartNumAdd" />
-			<mvc:mapping path="/changeShop_CartNumDel" />
-			<mvc:mapping path="/place_order" />
-			<mvc:mapping path="/userLogout" />
-			<mvc:mapping path="/checkOrder" />
-			<mvc:mapping path="/checkOrderitem" />
-			<mvc:mapping path="/allAmount" />
-			<mvc:mapping path="/addProductinShop_Cart" />
-			<mvc:mapping path="/deleteFocustable" />
-			<!-- 拦截所有请求 -->
-			<!-- <mvc:mapping path="/*" /> -->
+			<!-- 拦截一级目录user下所有请求 -->
+			 <mvc:mapping path="/user/*" />
 			<!-- 但不拦截以下请求 -->
-			<!-- <mvc:exclude-mapping path="/addUser" />
-			<mvc:exclude-mapping path="/login" />
-			<mvc:exclude-mapping path="/checkUsername" />
-			<mvc:exclude-mapping path="/checkPhone" />
-			<mvc:exclude-mapping path="/checkEmail" /> -->
+			<mvc:exclude-mapping path="/user/addUser" />
+			<mvc:exclude-mapping path="/user/login" />
+			<mvc:exclude-mapping path="/user/checkUsername" />
+			<mvc:exclude-mapping path="/user/checkPhone" />
+			<mvc:exclude-mapping path="/user/checkEmail" />
 			<bean class="com.ep.ep.interceptor.UserInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	<!--放行静态资源-->
+	<mvc:resources mapping="/assets/**" location="/assets/"/>
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

@@ -16,6 +16,7 @@
 		<result property="price" column="price" />
 		<result property="rprice" column="rprice" />
 		<result property="picture" column="picture" />
+		<result property="pt_id" column="pt_id"/>
 		<collection property="product_type" ofType="Product_type">
 		 <id property="ptid" column="pt_id"/>
 		 <result property="typename" column="typename"/>
@@ -24,8 +25,8 @@
 
 	<update id="updateProduct" parameterType="product">
 		update product set name=#{name},price=#{price},
-		rprice=#{rprice},picture=#{picture}
-		where uid=#{uid}
+		rprice=#{rprice},picture=#{picture},pt_id=#{pt_id}
+		where pid=#{pid}
 	</update>
 
 	<insert id="insertProduct" parameterType="product">
@@ -35,9 +36,11 @@
 	
 
 	<delete id="deleteProduct" parameterType="Integer">
+		
 		delete from product where pid=#{pid}
 	</delete>
 	
+	<!-- 查询所有商品级联查询出商品类型 -->
 	<select id="findAll" parameterType="product"
 	 resultMap="productsandtype">
 	select  *  from product p,product_type pt where p.pt_id=pt.ptid
@@ -54,5 +57,22 @@
 		 <result property="typename" column="typename"/>
 		</association>
 	</resultMap>
+  
+  <select id="pageProduct" parameterType="product" 
+   resultType="product">
+    select * from product limit #{page},#{size}
+  </select>
+  
+  <select id="productCount" resultType="Int">
+    select count(*) from product
+  </select>
+
+	<select id="findProductByName" resultType="Product">
+		SELECT * from product p where p.`name` like concat('%',#{name},'%') limit #{page},#{size}
+	</select>
+	<select id="productCountByName" resultType="java.lang.Integer">
+        SELECT count(*) from product p where p.`name` like concat('%',#{name},'%')
+	</select>
+
 
 </mapper>

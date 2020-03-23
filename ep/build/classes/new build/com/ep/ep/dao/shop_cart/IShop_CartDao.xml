@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<!-- 通过商品id查询购物车商品项() -->
 	<select id="findShop_cartByPid" resultType="Shop_cart">
-	select * from shop_cart sc where sc.product_id=#{pid}
+	select * from shop_cart sc where sc.product_id=#{pid} and sc.user_id=#{uid}
 	</select>
 	<!-- 从收藏夹添加商品进购物车 -->
 	<insert id="addShop_cart" parameterType="user" useGeneratedKeys="true" 
@@ -43,7 +43,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into shop_cart(user_id,product_id,shoppingnum) values(#{uid},#{pid},
 	#{shoppingnum}) 
 	</insert>
-
-
-
+     
+     <!--添加购物车  -->
+    <insert id="addShopcart" parameterType="user" useGeneratedKeys="true" keyProperty="cid" >
+      insert into shop_cart(user_id,product_id,shoppingnum) values(#{uid},#{pid},#{shoppingnum})
+    </insert>
+    
+    <!--删除购物车  -->
+    <delete id="deleteShopcartById" parameterType="Integer">
+      delete from shop_cart where cid=#{cid }
+    </delete>
+    
+    <!-- 清空购物车 -->
+    <delete id="deleteShopcart">
+      delete from shop_cart where user_id=#{uid}
+    </delete>
+   
 </mapper>

@@ -9,23 +9,32 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
-  </context-param>
+  <!--配置Spring监听器，默认只加载WEB—INF目录下的applicationContext.xml配置文件-->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  <!--启动tomcat时加载applicationContext.xml配置文件-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <!--设置配置文件的路径-->
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+
   <servlet>
+    <!--启动tocam时配置前端控制器-->
     <servlet-name>springmvc123</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
+      <!--初始化前端控制器-->
       <param-name>contextConfigLocation</param-name>
+      <!--配置文件所在位置-->
       <param-value>classpath:springmvc.xml</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
+    <!--当发送什么请求时需要经过前端控制器-->
     <servlet-name>springmvc123</servlet-name>
+    <!--/表示所有请求-->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
@@ -33,6 +42,7 @@
     <url-pattern>*.html</url-pattern>
   </servlet-mapping>
   <filter>
+    <!--配置一个中文乱码过滤器-->
     <filter-name>encoding</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
     <init-param>
